@@ -1,0 +1,31 @@
+.heroBanner {
+  padding: 3rem 0;
+  text-align: center;
+  position: relative;
+  border-bottom: 3px solid currentColor;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem 0;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sectionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 2rem 0 3rem;
+}
+
+@media screen and (max-width: 996px) {
+  .sectionGrid {
+    grid-template-columns: 1fr;
+  }
+}

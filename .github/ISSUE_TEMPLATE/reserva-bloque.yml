@@ -1,0 +1,53 @@
+name: Reserva de bloque editorial
+description: Solicita un bloque para trabajar sin conflictos
+title: "[Turno] Reserva bloque "
+labels: ["turno", "contenido"]
+body:
+  - type: dropdown
+    id: bloque
+    attributes:
+      label: Bloque de trabajo
+      description: Selecciona el bloque que vas a reservar
+      options:
+        - Bloque A - solve
+        - Bloque B - inspire
+        - Bloque C - glossary
+        - Bloque D - disconnected y answers-comments
+        - Bloque E - assets
+    validations:
+      required: true
+
+  - type: textarea
+    id: archivos
+    attributes:
+      label: Archivos o carpeta exacta
+      description: Indica la ruta exacta que editarás
+      placeholder: docs/no-tecnico/flujo-editorial.md
+    validations:
+      required: true
+
+  - type: input
+    id: fecha_inicio
+    attributes:
+      label: Fecha de inicio
+      placeholder: AAAA-MM-DD
+    validations:
+      required: true
+
+  - type: input
+    id: fecha_fin
+    attributes:
+      label: Fecha estimada de cierre
+      placeholder: AAAA-MM-DD
+    validations:
+      required: true
+
+  - type: dropdown
+    id: estado
+    attributes:
+      label: Estado
+      options:
+        - en-trabajo
+        - completado
+    validations:
+      required: true

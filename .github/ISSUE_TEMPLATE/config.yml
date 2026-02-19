@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Manual no técnico
+    url: https://manual.solecolombia.org/docs/no-tecnico/overview
+    about: Consulta primero la ruta guiada antes de abrir un issue general.
