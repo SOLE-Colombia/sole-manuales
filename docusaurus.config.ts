@@ -9,8 +9,8 @@ const config: Config = {
   future: {
     v4: true,
   },
-  url: 'https://manual.solecolombia.org',
-  baseUrl: '/',
+  url: 'https://sole-colombia.github.io',
+  baseUrl: '/sole-manuales/',
   organizationName: 'SOLE-Colombia',
   projectName: 'sole-manuales',
   onBrokenLinks: 'throw',
