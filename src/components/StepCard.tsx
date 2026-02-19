@@ -9,9 +9,10 @@ type StepCardProps = {
 export default function StepCard({number, title, children}: StepCardProps) {
   return (
     <section className="manual-step">
-      <h3>
-        Paso {number}: {title}
-      </h3>
+      <div style={{display: 'flex', alignItems: 'center'}}>
+        <span className="manual-step__number">{number}</span>
+        <h3>{title}</h3>
+      </div>
       <div>{children}</div>
     </section>
   );
