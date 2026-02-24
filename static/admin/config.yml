@@ -11,7 +11,7 @@ publish_mode: editorial_workflow
 
 site_url: https://manual.solecolombia.org
 display_url: https://manual.solecolombia.org
-logo_url: https://cdn.prod.website-files.com/63be04f0fe7d2f045f57f2d2/66a14fd7f98e3740f1a43ab3_Recurso%20220.svg
+logo_url: https://cdn.prod.website-files.com/6050c5e23e5cf1cbe505d4b5/655e8776ea625d500a2e14d7_Recurso%20220.svg
 
 media_folder: static/uploads
 public_folder: /uploads
