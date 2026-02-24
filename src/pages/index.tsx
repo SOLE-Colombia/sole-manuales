@@ -73,7 +73,7 @@ const roleCards: RoleCard[] = [
     quick_links: [
       {label: 'Política de colaboración', href: '/docs/subir-informacion/politica-colaboracion'},
       {label: 'Laboratorio Markdown', href: '/docs/subir-informacion/laboratorio-markdown'},
-      {label: 'Editor online', href: '/admin/'},
+      {label: 'Editor online', href: 'https://manual.solecolombia.org/admin/', external: true},
     ],
   },
   {
@@ -146,7 +146,7 @@ export default function Home(): ReactNode {
             <Link href="https://solecolombia.org">SOLE Colombia</Link>
             <Link href="https://voltaje.solecolombia.org">Voltaje</Link>
             <Link href="https://github.com/SOLE-Colombia/sole-manuales">Repositorio de manuales</Link>
-            <Link to="/admin/">Editor online</Link>
+            <Link href="https://manual.solecolombia.org/admin/">Editor online</Link>
           </div>
         </section>
       </main>

@@ -59,8 +59,8 @@ const config: Config = {
           label: 'Subir información',
         },
         {to: '/docs/cacharrero/overview', label: 'Cacharrero', position: 'left'},
-        {to: '/docs/legacy/index', label: 'Legacy', position: 'left'},
-        {to: '/admin/', label: 'Editor', position: 'right'},
+        {to: '/docs/legacy', label: 'Legacy', position: 'left'},
+        {href: 'https://manual.solecolombia.org/admin/', label: 'Editor', position: 'right'},
         {
           href: 'https://github.com/SOLE-Colombia/sole-manuales',
           label: 'GitHub',
@@ -79,13 +79,13 @@ const config: Config = {
               to: '/docs/subir-informacion/overview',
             },
             {label: 'Cacharrero', to: '/docs/cacharrero/overview'},
-            {label: 'Legacy', to: '/docs/legacy/index'},
+            {label: 'Legacy', to: '/docs/legacy'},
           ],
         },
         {
           title: 'Accesos',
           items: [
-            {label: 'Editor online', to: '/admin/'},
+            {label: 'Editor online', href: 'https://manual.solecolombia.org/admin/'},
             {label: 'Implementación online', to: '/docs/cacharrero/implementacion-online'},
           ],
         },
