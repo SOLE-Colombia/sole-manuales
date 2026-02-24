@@ -5,6 +5,10 @@ sidebar_position: 2
 
 # Instalación en Windows (WSL2)
 
+:::warning Ruta movida
+Esta guía quedó en legacy. Usa la versión vigente en [Subir información a Voltaje > Instalación en Windows (WSL2)](/docs/subir-informacion/instalacion-windows-wsl).
+:::
+
 Guía para dejar un entorno estable para edición y publicación de manuales.
 
 ## Software necesario

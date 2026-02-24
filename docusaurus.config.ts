@@ -4,17 +4,16 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Manuales SOLE',
-  tagline: 'Documentación interactiva para equipos técnicos y no técnicos',
+  tagline: 'Manual de cacharrero y ruta para subir informacion a Voltaje',
   favicon: 'img/favicon.ico',
   future: {
     v4: true,
   },
-  url: 'https://sole-colombia.github.io',
-  baseUrl: '/sole-manuales/',
+  url: 'https://manual.solecolombia.org',
+  baseUrl: '/',
   organizationName: 'SOLE-Colombia',
   projectName: 'sole-manuales',
-  trailingSlash: false,
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'throw',
   markdown: {
     hooks: {
       onBrokenMarkdownLinks: 'warn',
@@ -31,7 +30,7 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           editUrl:
-            'https://github.com/SOLE-Colombia/sole-manuales/edit/main/',
+            'https://github.com/SOLE-Colombia/sole-manuales/blob/main/',
         },
         blog: false,
         theme: {
@@ -45,29 +44,23 @@ const config: Config = {
     colorMode: {
       defaultMode: 'light',
       disableSwitch: false,
-      respectPrefersColorScheme: true,
-    },
-    docs: {
-      sidebar: {
-        hideable: true,
-        autoCollapseCategories: true,
-      },
+      respectPrefersColorScheme: false,
     },
     navbar: {
       title: 'Manuales SOLE',
       logo: {
-        alt: 'SOLE Colombia',
+        alt: 'Manuales SOLE',
         src: 'img/logo.svg',
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'mainSidebar',
+          to: '/docs/subir-informacion/overview',
           position: 'left',
-          label: 'Documentación',
+          label: 'Subir información',
         },
-        {to: '/docs/no-tecnico/overview', label: 'No técnico', position: 'left'},
-        {to: '/docs/tecnico/overview', label: 'Técnico', position: 'left'},
+        {to: '/docs/cacharrero/overview', label: 'Cacharrero', position: 'left'},
+        {to: '/docs/legacy/index', label: 'Legacy', position: 'left'},
+        {to: '/admin/', label: 'Editor', position: 'right'},
         {
           href: 'https://github.com/SOLE-Colombia/sole-manuales',
           label: 'GitHub',
@@ -81,35 +74,37 @@ const config: Config = {
         {
           title: 'Manuales',
           items: [
-            {label: 'Primeros pasos', to: '/docs/getting-started/introduction'},
-            {label: 'No técnico', to: '/docs/no-tecnico/overview'},
-            {label: 'Técnico', to: '/docs/tecnico/overview'},
-            {label: 'Usabilidad', to: '/docs/usabilidad/overview'},
+            {
+              label: 'Subir información',
+              to: '/docs/subir-informacion/overview',
+            },
+            {label: 'Cacharrero', to: '/docs/cacharrero/overview'},
+            {label: 'Legacy', to: '/docs/legacy/index'},
           ],
         },
         {
-          title: 'Operación',
+          title: 'Accesos',
           items: [
-            {label: 'Política de turnos', to: '/docs/governance/modelo-turnos'},
-            {label: 'Checklist mensual', to: '/docs/governance/checklist-vigencia'},
-            {label: 'Fuentes oficiales', to: '/docs/governance/fuentes-oficiales'},
+            {label: 'Editor online', to: '/admin/'},
+            {label: 'Implementación online', to: '/docs/cacharrero/implementacion-online'},
           ],
         },
         {
-          title: 'Comunidad',
+          title: 'Organización',
           items: [
-            {label: 'SOLE Colombia', href: 'https://solecolombia.org'},
-            {label: 'GitHub', href: 'https://github.com/SOLE-Colombia/sole-manuales'},
-            {label: 'Voltaje', href: 'https://voltaje.solecolombia.org'},
+            {
+              label: 'SOLE Colombia',
+              href: 'https://solecolombia.org',
+            },
+            {label: 'Repositorio', href: 'https://github.com/SOLE-Colombia/sole-manuales'},
           ],
         },
       ],
-      copyright: `© ${new Date().getFullYear()} SOLE Colombia · Hecho con Docusaurus`,
+      copyright: `Copyright © ${new Date().getFullYear()} SOLE Colombia`,
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.oneDark,
-      additionalLanguages: ['bash', 'json', 'yaml', 'docker'],
     },
   } satisfies Preset.ThemeConfig,
 };

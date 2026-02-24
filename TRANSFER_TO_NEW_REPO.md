@@ -16,6 +16,12 @@ cp -R /workspaces/voltaje-dev/manuales ./sole-manuales
 cd sole-manuales
 ```
 
+Alternativa automatizada:
+
+```bash
+./scripts/bootstrap-new-repo.sh /ruta/sole-manuales git@github.com:SOLE-Colombia/sole-manuales.git
+```
+
 ## 3) Inicializar git y publicar
 
 ```bash
@@ -39,8 +45,24 @@ git push -u origin main
 2. Esperar propagación.
 3. Verificar que `static/CNAME` contiene `manual.solecolombia.org`.
 
-## 6) Verificación final
+## 6) Activar validación y aprobaciones
+
+1. Confirmar workflow `.github/workflows/ci-docs.yml`.
+2. Confirmar archivo `.github/CODEOWNERS`.
+3. En branch protection de `main`, activar:
+   - Require pull request before merging.
+   - Require approvals.
+   - Dismiss stale approvals.
+   - Require status checks to pass.
+
+## 7) Activar editor online
+
+1. Verificar `static/admin/index.html`.
+2. Verificar `static/admin/config.yml`.
+3. Abrir `https://manual.solecolombia.org/admin/` tras el primer deploy.
+
+## 8) Verificación final
 
 - `https://manual.solecolombia.org` responde.
-- Navegación de docs correcta.
-- Build CI en verde.
+- Navegación v1 (`cacharrero` y `subir-informacion`) correcta.
+- CI en verde y PR con aprobación obligatoria.

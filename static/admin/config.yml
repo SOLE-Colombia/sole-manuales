@@ -1,0 +1,140 @@
+backend:
+  name: github
+  repo: SOLE-Colombia/sole-manuales
+  branch: main
+  # Fase 1: autenticacion GitHub para miembros de SOLE-Colombia.
+  # Fase 2: configurar gateway para GitHub + Google Workspace + admin local.
+  # base_url: https://auth.manual.solecolombia.org
+  # auth_endpoint: /auth
+
+publish_mode: editorial_workflow
+
+site_url: https://manual.solecolombia.org
+display_url: https://manual.solecolombia.org
+logo_url: /img/logo.svg
+
+media_folder: static/uploads
+public_folder: /uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: '-'
+
+collections:
+  - name: cacharrero
+    label: Cacharrero
+    folder: docs/cacharrero
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    summary: '{{title}} · {{status}}'
+    fields:
+      - label: Titulo
+        name: title
+        widget: string
+      - label: Sidebar Position
+        name: sidebar_position
+        widget: number
+        value_type: int
+        min: 1
+      - label: Owner Role
+        name: owner_role
+        widget: select
+        options:
+          - Editor
+          - Cacharrero
+          - Dirección de Voltaje
+          - Administrativo
+          - Gestion del conocimiento
+          - Jardinera de conexiones
+      - label: Last Reviewed
+        name: last_reviewed
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - draft
+          - review
+          - published
+      - label: Contenido
+        name: body
+        widget: markdown
+
+  - name: subir_informacion
+    label: Subir informacion
+    folder: docs/subir-informacion
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    summary: '{{title}} · {{status}}'
+    fields:
+      - label: Titulo
+        name: title
+        widget: string
+      - label: Sidebar Position
+        name: sidebar_position
+        widget: number
+        value_type: int
+        min: 1
+      - label: Owner Role
+        name: owner_role
+        widget: select
+        options:
+          - Editor
+          - Cacharrero
+          - Dirección de Voltaje
+          - Administrativo
+          - Gestion del conocimiento
+          - Jardinera de conexiones
+      - label: Last Reviewed
+        name: last_reviewed
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - draft
+          - review
+          - published
+      - label: Contenido
+        name: body
+        widget: markdown
+
+  - name: assets
+    label: Assets
+    folder: docs/assets
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    fields:
+      - label: Titulo
+        name: title
+        widget: string
+      - label: Owner Role
+        name: owner_role
+        widget: hidden
+        default: Editor
+      - label: Last Reviewed
+        name: last_reviewed
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Status
+        name: status
+        widget: hidden
+        default: draft
+      - label: Archivo
+        name: file
+        widget: image
+      - label: Descripcion
+        name: body
+        widget: markdown

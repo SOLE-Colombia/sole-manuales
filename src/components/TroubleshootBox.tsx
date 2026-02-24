@@ -6,12 +6,12 @@ type TroubleshootBoxProps = {
 };
 
 export default function TroubleshootBox({
-  title = 'Si algo falla, intenta esto',
+  title = 'Si falla, haz esto',
   children,
 }: TroubleshootBoxProps) {
   return (
     <aside className="manual-warning">
-      <strong>⚠️ {title}</strong>
+      <strong>{title}</strong>
       <div>{children}</div>
     </aside>
   );

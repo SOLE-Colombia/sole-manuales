@@ -1,0 +1,8 @@
+# Actualizar estos equipos cuando se creen en la organizacion.
+
+* @SOLE-Colombia/direccion-voltaje @SOLE-Colombia/gestion-del-conocimiento
+
+docs/cacharrero/ @SOLE-Colombia/direccion-voltaje @SOLE-Colombia/gestion-del-conocimiento
+docs/subir-informacion/ @SOLE-Colombia/direccion-voltaje @SOLE-Colombia/gestion-del-conocimiento
+static/admin/ @SOLE-Colombia/direccion-voltaje @SOLE-Colombia/gestion-del-conocimiento
+.github/workflows/ @SOLE-Colombia/direccion-voltaje @SOLE-Colombia/gestion-del-conocimiento

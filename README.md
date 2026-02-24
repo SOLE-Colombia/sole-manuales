@@ -1,12 +1,15 @@
 # Manuales SOLE (Docusaurus)
 
-Monorepo de manuales interactivos por pasos para SOLE Colombia.
+Portal de manuales independiente para SOLE Colombia, pensado para publicarse en `manual.solecolombia.org`.
 
-## Objetivo
+## Alcance v1
 
-- Publicar manuales en `manual.solecolombia.org`.
-- Soportar contenido no técnico, técnico, usabilidad y gobernanza en un mismo portal.
-- Facilitar que equipos no técnicos puedan avanzar con rutas guiadas.
+Dos rutas operativas:
+
+- `docs/cacharrero/`: informacion tecnica de plataforma y operacion online.
+- `docs/subir-informacion/`: ruta no tecnica para crear y publicar contenido.
+
+Se incluye `docs/legacy/` como historico no operativo.
 
 ## Requisitos
 
@@ -16,30 +19,46 @@ Monorepo de manuales interactivos por pasos para SOLE Colombia.
 ## Desarrollo local
 
 ```bash
-npm install
+npm ci
 npm run start
 ```
 
-## Build de validación
+## Build y validacion
 
 ```bash
-npm run build
+npm run check
 ```
 
 Salida estática en `build/`.
 
-## Estructura principal
+## Edicion online (Decap CMS)
 
-- `docs/getting-started/`
-- `docs/no-tecnico/`
-- `docs/usabilidad/`
-- `docs/tecnico/`
-- `docs/governance/`
+- URL: `/admin`
+- Configuracion: `static/admin/config.yml`
+- Modo de publicacion: `editorial_workflow`
+
+## Aprobacion obligatoria
+
+- `CODEOWNERS` en `.github/CODEOWNERS`
+- Workflow de validacion en `.github/workflows/ci-docs.yml`
+- Branch protection recomendado en `main`:
+  - Require PR
+  - Require approvals
+  - Dismiss stale approvals
+  - Require status checks
 
 ## Deploy
 
-El deploy se gestiona con GitHub Pages y GitHub Actions (`.github/workflows/deploy-pages.yml`).
+- Workflow: `.github/workflows/deploy-pages.yml`
+- Dominio: `manual.solecolombia.org`
+- CNAME esperado: `manual -> SOLE-Colombia.github.io`
 
 ## Publicar como repo independiente
 
 Ver `TRANSFER_TO_NEW_REPO.md`.
+
+Tambien puedes automatizar el bootstrap local con:
+
+```bash
+./scripts/bootstrap-new-repo.sh /ruta/sole-manuales git@github.com:SOLE-Colombia/sole-manuales.git
+```

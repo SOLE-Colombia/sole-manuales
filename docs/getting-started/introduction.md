@@ -5,6 +5,10 @@ sidebar_position: 1
 
 # Introducción
 
+:::warning Ruta movida
+Esta guía quedó en legacy. Usa la ruta actual: [Subir información a Voltaje](/docs/subir-informacion/overview).
+:::
+
 Este portal es el manual interactivo de SOLE Colombia para gestionar contenidos, operación técnica y usabilidad de la página.
 
 ## Qué vas a lograr aquí

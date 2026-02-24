@@ -5,6 +5,10 @@ sidebar_position: 1
 
 # Manual no técnico
 
+:::warning Ruta movida
+Esta guía quedó en legacy. Usa la ruta actual: [Subir información a Voltaje](/docs/subir-informacion/overview).
+:::
+
 Este módulo está pensado para personas que editan contenido sin trabajar en código.
 
 ## Ruta recomendada
