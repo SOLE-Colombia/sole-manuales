@@ -10,11 +10,11 @@ status: published
 
 ## Software necesario
 
-- WSL: <https://learn.microsoft.com/windows/wsl/install>
-- Docker Desktop: <https://www.docker.com/products/docker-desktop/>
-- VS Code: <https://code.visualstudio.com/>
+- WSL: [learn.microsoft.com/windows/wsl/install](https://learn.microsoft.com/windows/wsl/install)
+- Docker Desktop: [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/)
+- VS Code: [code.visualstudio.com](https://code.visualstudio.com/)
 - Dev Containers extension
-- Obsidian: <https://obsidian.md/download>
+- Obsidian: [obsidian.md/download](https://obsidian.md/download)
 - GitHub Desktop o GitKraken
 
 ## Pasos
