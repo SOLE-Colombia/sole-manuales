@@ -1,6 +1,6 @@
 ---
 title: Implementacion online del repositorio
-sidebar_position: 6
+sidebar_position: 8
 owner_role: Cacharrero
 last_reviewed: 2026-02-24
 status: published
@@ -53,6 +53,7 @@ git push -u origin main
 - Endpoint: `/admin`
 - Configuracion: `static/admin/config.yml`
 - Flujo: `editorial_workflow`
+- OAuth proxy en Cloudflare: ver [CMS con Cloudflare OAuth](./cms-cloudflare-oauth.md).
 
 ## 6) Fases de autenticacion
 
@@ -67,7 +68,13 @@ git push -u origin main
   - Google Workspace (`solecolombia.org`)
   - Usuario local `admin`
 
-## 7) Cutover gradual
+## 7) Politica de imagenes de marca
+
+- Usar URLs oficiales de `solecolombia.org` para logo y fondos del home.
+- Mantener local solo favicon y logo fallback.
+- Ver detalle operativo en [Politica de assets remotos](./politica-assets-remotos.md).
+
+## 8) Cutover gradual
 
 1. Publicar primero `cacharrero`.
 2. Publicar luego `subir-informacion`.

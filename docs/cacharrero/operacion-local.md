@@ -23,13 +23,14 @@ npm run start
 ## Build de validacion
 
 ```bash
-npm run build
+npm run check
 ```
 
 ## Checklist tecnico antes de PR
 
 - [ ] Navegacion de sidebar sin errores.
 - [ ] Rutas nuevas visibles en home.
+- [ ] `static/data/homepage.json` valida URLs remotas vigentes.
 - [ ] Frontmatter obligatorio completo.
 - [ ] Build local en verde.
 

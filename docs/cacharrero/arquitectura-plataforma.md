@@ -15,6 +15,7 @@ status: published
 - Hosting: GitHub Pages.
 - Dominio: `manual.solecolombia.org`.
 - Edicion online: Decap CMS en `/admin`.
+- Auth CMS: OAuth proxy en `auth.manual.solecolombia.org` (Cloudflare Worker).
 
 ## Estructura base
 
@@ -27,6 +28,7 @@ status: published
 ├── src/pages/index.tsx
 ├── sidebars.ts
 ├── docusaurus.config.ts
+├── static/data/homepage.json
 ├── static/admin/
 └── .github/workflows/
 ```

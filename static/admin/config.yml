@@ -2,16 +2,16 @@ backend:
   name: github
   repo: SOLE-Colombia/sole-manuales
   branch: main
-  # Fase 1: autenticacion GitHub para miembros de SOLE-Colombia.
-  # Fase 2: configurar gateway para GitHub + Google Workspace + admin local.
-  # base_url: https://auth.manual.solecolombia.org
-  # auth_endpoint: /auth
+  # Acceso esperado: miembros autorizados del equipo SOLE con permisos en el repo.
+  # OAuth proxy desplegado en Cloudflare Worker.
+  base_url: https://auth.manual.solecolombia.org
+  auth_endpoint: /auth
 
 publish_mode: editorial_workflow
 
 site_url: https://manual.solecolombia.org
 display_url: https://manual.solecolombia.org
-logo_url: /img/logo.svg
+logo_url: https://cdn.prod.website-files.com/63be04f0fe7d2f045f57f2d2/66a14fd7f98e3740f1a43ab3_Recurso%20220.svg
 
 media_folder: static/uploads
 public_folder: /uploads
@@ -138,3 +138,114 @@ collections:
       - label: Descripcion
         name: body
         widget: markdown
+
+  - name: site_config
+    label: Configuracion del sitio
+    delete: false
+    files:
+      - name: homepage
+        label: Home principal
+        file: static/data/homepage.json
+        format: json
+        fields:
+          - label: Hero
+            name: hero
+            widget: object
+            fields:
+              - label: Eyebrow
+                name: eyebrow
+                widget: string
+              - label: Titulo
+                name: title
+                widget: string
+              - label: Subtitulo
+                name: subtitle
+                widget: text
+              - label: Imagen fondo (URL oficial SOLE)
+                name: background_image
+                widget: string
+              - label: CTA principal
+                name: primary_cta
+                widget: object
+                fields:
+                  - label: Texto
+                    name: label
+                    widget: string
+                  - label: URL
+                    name: href
+                    widget: string
+                  - label: Enlace externo
+                    name: external
+                    widget: boolean
+                    default: false
+              - label: CTA secundario
+                name: secondary_cta
+                widget: object
+                fields:
+                  - label: Texto
+                    name: label
+                    widget: string
+                  - label: URL
+                    name: href
+                    widget: string
+                  - label: Enlace externo
+                    name: external
+                    widget: boolean
+                    default: false
+          - label: Marca
+            name: brand
+            widget: object
+            fields:
+              - label: Logo (URL oficial SOLE)
+                name: logo_url
+                widget: string
+              - label: Texto alternativo del logo
+                name: logo_alt
+                widget: string
+          - label: Roles
+            name: roles
+            widget: list
+            summary: '{{fields.label}}'
+            fields:
+              - label: ID de rol
+                name: role_id
+                widget: string
+              - label: Etiqueta
+                name: label
+                widget: string
+              - label: Descripcion
+                name: description
+                widget: text
+              - label: Ruta inicial
+                name: start_path
+                widget: string
+              - label: Links rapidos
+                name: quick_links
+                widget: list
+                summary: '{{fields.label}}'
+                fields:
+                  - label: Texto
+                    name: label
+                    widget: string
+                  - label: URL
+                    name: href
+                    widget: string
+                  - label: Enlace externo
+                    name: external
+                    widget: boolean
+                    default: false
+          - label: Accesos rapidos de fundacion
+            name: quick_access
+            widget: list
+            summary: '{{fields.label}}'
+            fields:
+              - label: Texto
+                name: label
+                widget: string
+              - label: URL
+                name: href
+                widget: string
+              - label: Enlace externo
+                name: external
+                widget: boolean
+                default: true

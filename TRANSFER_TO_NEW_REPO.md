@@ -61,8 +61,26 @@ git push -u origin main
 2. Verificar `static/admin/config.yml`.
 3. Abrir `https://manual.solecolombia.org/admin/` tras el primer deploy.
 
-## 8) Verificación final
+## 8) Activar OAuth en Cloudflare para CMS
+
+1. Crear GitHub OAuth App:
+   - Homepage URL: `https://auth.manual.solecolombia.org`
+   - Callback URL: `https://auth.manual.solecolombia.org/callback`
+2. Desplegar proxy OAuth en Cloudflare Worker.
+3. Confirmar `base_url` y `auth_endpoint` en `static/admin/config.yml`.
+4. Verificar login en `https://manual.solecolombia.org/admin/`.
+
+## 9) Verificación final
 
 - `https://manual.solecolombia.org` responde.
 - Navegación v1 (`cacharrero` y `subir-informacion`) correcta.
 - CI en verde y PR con aprobación obligatoria.
+- Login CMS funcional con Cloudflare OAuth.
+
+## 10) Desacople definitivo con `voltaje-dev`
+
+Después del cutover:
+
+- Editar manuales solo en `SOLE-Colombia/sole-manuales`.
+- No usar commits en `voltaje-dev` para cambios de manuales operativos.
+- Mantener en `voltaje-dev` únicamente enlaces de referencia al portal de manuales.

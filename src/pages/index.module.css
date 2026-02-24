@@ -1,68 +1,176 @@
+.pageRoot {
+  padding-bottom: 3.5rem;
+}
+
 .heroBanner {
-  padding: 3.5rem 0;
-  text-align: center;
-  position: relative;
-  border-bottom: 3px solid currentColor;
+  margin-top: 1.5rem;
+  border-radius: 1.4rem;
+  background-position: center;
+  background-size: cover;
+  color: #ffffff;
+  overflow: hidden;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem 0;
-  }
+.heroContent {
+  max-width: 52rem;
+  padding: 3.2rem 1.1rem 3.5rem;
 }
 
-.buttons {
+.heroEyebrow {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 0.34rem 0.75rem;
+}
+
+.heroLogo {
+  height: 2rem;
+  width: auto;
+  margin: 0.3rem 0 1rem;
+  filter: brightness(0) invert(1);
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.05;
+  margin-bottom: 0.8rem;
+}
+
+.heroSubtitle {
+  max-width: 44rem;
+  margin-bottom: 1.25rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.heroCtas {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.heroPrimaryCta {
+  background: #ffffff !important;
+  color: #111111 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.heroSecondaryCta {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.58) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: none !important;
+}
+
+.rolesSection {
+  padding-top: 2.2rem;
+}
+
+.sectionHeader {
+  margin-bottom: 1rem;
+}
+
+.sectionHeader p {
+  margin: 0;
+  color: #4b5563;
 }
 
 .sectionGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
-  padding: 2rem 0 3rem;
+}
+
+.roleCard {
+  border: 1px solid #d1d5db;
+  border-radius: 1rem;
+  background: #ffffff;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.roleCard h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.roleCard p {
+  margin: 0;
+  color: #374151;
+  min-height: 4rem;
+}
+
+.openRoute {
+  width: fit-content;
+  box-shadow: none !important;
+  border-width: 1px !important;
+}
+
+.quickLinks {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.quickLinks li {
+  margin-bottom: 0.4rem;
+}
+
+.foundationLinks {
+  margin-top: 1.2rem;
+}
+
+.linkRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.quickAccessLink {
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  padding: 0.42rem 0.8rem;
+  color: #111827;
+  text-decoration: none;
+  background: #ffffff;
 }
 
 @media screen and (max-width: 996px) {
+  .heroContent {
+    padding: 2.6rem 1rem 2.7rem;
+  }
+
   .sectionGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media screen and (max-width: 640px) {
+  .heroContent {
+    padding: 2.2rem 0.9rem 2.3rem;
+  }
+
+  .heroCtas {
+    flex-direction: column;
+  }
+
+  .heroPrimaryCta,
+  .heroSecondaryCta {
+    width: 100%;
+    justify-content: center;
+  }
+
   .sectionGrid {
     grid-template-columns: 1fr;
   }
-}
 
-.roleCard h2 {
-  margin-bottom: 0.7rem;
-}
-
-.roleCard p {
-  min-height: 3.2rem;
-}
-
-.quickLinks {
-  margin: 0.9rem 0 0;
-  padding-left: 1rem;
-}
-
-.quickLinks li {
-  margin-bottom: 0.3rem;
-}
-
-.foundationLinks {
-  padding: 0 0 3rem;
-}
-
-.foundationLinks h2 {
-  margin-bottom: 0.8rem;
-}
-
-.linkRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem 1.2rem;
+  .roleCard p {
+    min-height: 0;
+  }
 }

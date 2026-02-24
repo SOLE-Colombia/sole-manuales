@@ -1,0 +1,189 @@
+{
+  "hero": {
+    "eyebrow": "Fundacion SOLE Colombia",
+    "title": "Manuales para operar, publicar y sostener el conocimiento",
+    "subtitle": "Ruta clara para equipos tecnicos y no tecnicos. Empieza por tu rol, sigue el flujo y publica con revision editorial.",
+    "background_image": "https://cdn.prod.website-files.com/63be04f0fe7d2f045f57f2d2/67619dc00a48333410dd56e0_IMG_7056-p-500.jpg",
+    "primary_cta": {
+      "label": "Empezar a subir informacion",
+      "href": "/docs/subir-informacion/overview",
+      "external": false
+    },
+    "secondary_cta": {
+      "label": "Ir a Cacharrero",
+      "href": "/docs/cacharrero/overview",
+      "external": false
+    }
+  },
+  "brand": {
+    "logo_url": "https://cdn.prod.website-files.com/63be04f0fe7d2f045f57f2d2/66a14fd7f98e3740f1a43ab3_Recurso%20220.svg",
+    "logo_alt": "SOLE Colombia"
+  },
+  "roles": [
+    {
+      "role_id": "editor",
+      "label": "Editor",
+      "description": "Crea y actualiza contenido en Markdown con flujo guiado de publicacion.",
+      "start_path": "/docs/subir-informacion/overview",
+      "quick_links": [
+        {
+          "label": "Markdown basico",
+          "href": "/docs/subir-informacion/markdown-basico",
+          "external": false
+        },
+        {
+          "label": "Checklist de publicacion",
+          "href": "/docs/subir-informacion/checklist-publicacion",
+          "external": false
+        },
+        {
+          "label": "Voltaje",
+          "href": "https://voltaje.solecolombia.org",
+          "external": true
+        }
+      ]
+    },
+    {
+      "role_id": "cacharrero",
+      "label": "Cacharrero",
+      "description": "Mantiene arquitectura, despliegue y operacion tecnica del portal de manuales.",
+      "start_path": "/docs/cacharrero/overview",
+      "quick_links": [
+        {
+          "label": "Operacion local",
+          "href": "/docs/cacharrero/operacion-local",
+          "external": false
+        },
+        {
+          "label": "Deploy y entornos",
+          "href": "/docs/cacharrero/deploy-y-entornos",
+          "external": false
+        },
+        {
+          "label": "CMS Cloudflare OAuth",
+          "href": "/docs/cacharrero/cms-cloudflare-oauth",
+          "external": false
+        },
+        {
+          "label": "Repositorio",
+          "href": "https://github.com/SOLE-Colombia/sole-manuales",
+          "external": true
+        }
+      ]
+    },
+    {
+      "role_id": "direccion-voltaje",
+      "label": "Direccion de Voltaje",
+      "description": "Aprueba cambios estrategicos y valida lineamientos de publicacion.",
+      "start_path": "/docs/cacharrero/auditoria-y-vigencia",
+      "quick_links": [
+        {
+          "label": "Auditoria y vigencia",
+          "href": "/docs/cacharrero/auditoria-y-vigencia",
+          "external": false
+        },
+        {
+          "label": "Implementacion online",
+          "href": "/docs/cacharrero/implementacion-online",
+          "external": false
+        },
+        {
+          "label": "Sitio SOLE",
+          "href": "https://solecolombia.org",
+          "external": true
+        }
+      ]
+    },
+    {
+      "role_id": "administrativo",
+      "label": "Administrativo",
+      "description": "Consulta rutas operativas, publicaciones vigentes y accesos institucionales.",
+      "start_path": "/docs/subir-informacion/checklist-publicacion",
+      "quick_links": [
+        {
+          "label": "Flujo editorial",
+          "href": "/docs/subir-informacion/flujo-editorial",
+          "external": false
+        },
+        {
+          "label": "Politica de colaboracion",
+          "href": "/docs/subir-informacion/politica-colaboracion",
+          "external": false
+        },
+        {
+          "label": "Fundacion SOLE",
+          "href": "https://solecolombia.org",
+          "external": true
+        }
+      ]
+    },
+    {
+      "role_id": "gestion-conocimiento",
+      "label": "Gestion del conocimiento",
+      "description": "Define vigencia documental y coordina calidad editorial en cada ciclo.",
+      "start_path": "/docs/subir-informacion/politica-colaboracion",
+      "quick_links": [
+        {
+          "label": "Politica de colaboracion",
+          "href": "/docs/subir-informacion/politica-colaboracion",
+          "external": false
+        },
+        {
+          "label": "Laboratorio Markdown",
+          "href": "/docs/subir-informacion/laboratorio-markdown",
+          "external": false
+        },
+        {
+          "label": "Editor online",
+          "href": "https://manual.solecolombia.org/admin/",
+          "external": true
+        }
+      ]
+    },
+    {
+      "role_id": "jardinera-conexiones",
+      "label": "Jardinera de conexiones",
+      "description": "Conecta contenidos, rutas y equipos para facilitar publicacion sin friccion.",
+      "start_path": "/docs/subir-informacion/flujo-editorial",
+      "quick_links": [
+        {
+          "label": "Subir con GitHub Desktop",
+          "href": "/docs/subir-informacion/subir-con-github-desktop",
+          "external": false
+        },
+        {
+          "label": "Subir con GitKraken",
+          "href": "/docs/subir-informacion/subir-con-gitkraken",
+          "external": false
+        },
+        {
+          "label": "Comunidad SOLE",
+          "href": "https://www.solecolombia.org",
+          "external": true
+        }
+      ]
+    }
+  ],
+  "quick_access": [
+    {
+      "label": "SOLE Colombia",
+      "href": "https://solecolombia.org",
+      "external": true
+    },
+    {
+      "label": "Voltaje",
+      "href": "https://voltaje.solecolombia.org",
+      "external": true
+    },
+    {
+      "label": "Repositorio de manuales",
+      "href": "https://github.com/SOLE-Colombia/sole-manuales",
+      "external": true
+    },
+    {
+      "label": "Editor online",
+      "href": "https://manual.solecolombia.org/admin/",
+      "external": true
+    }
+  ]
+}

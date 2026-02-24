@@ -2,6 +2,10 @@
 
 Portal de manuales independiente para SOLE Colombia, pensado para publicarse en `manual.solecolombia.org`.
 
+- Portal publico: `https://manual.solecolombia.org`
+- Repositorio fuente: `https://github.com/SOLE-Colombia/sole-manuales`
+- Editor CMS: `https://manual.solecolombia.org/admin/`
+
 ## Alcance v1
 
 Dos rutas operativas:
@@ -33,9 +37,44 @@ Salida estática en `build/`.
 
 ## Edicion online (Decap CMS)
 
-- URL: `/admin`
+- URL: `https://manual.solecolombia.org/admin/`
 - Configuracion: `static/admin/config.yml`
 - Modo de publicacion: `editorial_workflow`
+- OAuth proxy: `https://auth.manual.solecolombia.org` (Cloudflare Worker)
+- Callback OAuth esperado: `https://auth.manual.solecolombia.org/callback`
+
+Usa CMS cuando el cambio sea solo contenido (`docs/`, `static/uploads/` y `static/data/homepage.json`).
+
+## Politica de imagenes
+
+- Para branding del home usar URLs oficiales de `solecolombia.org` (CDN oficial).
+- Mantener local solo favicon y logo fallback.
+- Configuracion editable de home: `static/data/homepage.json`.
+
+## Cuando usar git clone
+
+Usa clon local del repo `sole-manuales` cuando necesites:
+
+- Cambiar configuracion (`docusaurus.config.*`, `sidebars.*`)
+- Ajustar componentes/UI (`src/`)
+- Cambiar workflows, CODEOWNERS o reglas de CI
+- Resolver errores de build o enlaces
+
+Comandos base:
+
+```bash
+git clone git@github.com:SOLE-Colombia/sole-manuales.git
+cd sole-manuales
+npm ci
+npm run start
+```
+
+## Separacion de repos (obligatoria)
+
+- `voltaje-dev` y `sole-manuales` son repos distintos.
+- Un commit en `voltaje-dev` no publica ni modifica `manual.solecolombia.org`.
+- Un commit en `sole-manuales` no modifica `voltaje-dev`.
+- El contenido oficial de manuales se edita y publica solo desde `SOLE-Colombia/sole-manuales`.
 
 ## Aprobacion obligatoria
 
@@ -52,6 +91,7 @@ Salida estática en `build/`.
 - Workflow: `.github/workflows/deploy-pages.yml`
 - Dominio: `manual.solecolombia.org`
 - CNAME esperado: `manual -> SOLE-Colombia.github.io`
+- Dominio de auth CMS: `auth.manual.solecolombia.org` (Cloudflare Worker)
 
 ## Publicar como repo independiente
 

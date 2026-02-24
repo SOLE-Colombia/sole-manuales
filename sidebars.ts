@@ -26,6 +26,8 @@ const sidebars: SidebarsConfig = {
         'cacharrero/operacion-local',
         'cacharrero/deploy-y-entornos',
         'cacharrero/auditoria-y-vigencia',
+        'cacharrero/politica-assets-remotos',
+        'cacharrero/cms-cloudflare-oauth',
         'cacharrero/implementacion-online',
       ],
     },
