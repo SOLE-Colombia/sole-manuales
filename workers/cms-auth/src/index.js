@@ -67,9 +67,9 @@ function escapeHtml(input) {
 }
 
 /**
- * @param {{ errorText?: string, origin: string, provider: string }} args
+ * @param {{ errorText?: string, origin: string, provider: string, authPath: string }} args
  */
-function renderLoginPage({errorText, origin, provider}) {
+function renderLoginPage({errorText, origin, provider, authPath}) {
   const errorBanner = errorText
     ? `<p style="background:#fee2e2;color:#991b1b;padding:10px;border-radius:8px;">${escapeHtml(errorText)}</p>`
     : '';
@@ -131,7 +131,7 @@ function renderLoginPage({errorText, origin, provider}) {
       <h1>Ingreso al CMS</h1>
       <p>Usa tu usuario y clave editorial para continuar.</p>
       ${errorBanner}
-      <form method="post" action="/auth">
+      <form method="post" action="${escapeHtml(authPath)}">
         <input type="hidden" name="origin" value="${escapeHtml(origin)}" />
         <input type="hidden" name="provider" value="${escapeHtml(provider)}" />
 
@@ -190,7 +190,7 @@ async function handleGetAuth(request, env) {
   const origin = queryOrigin && allowedOrigins.includes(queryOrigin) ? queryOrigin : allowedOrigins[0];
   const provider = (url.searchParams.get('provider') || 'github').toLowerCase();
 
-  return new Response(renderLoginPage({origin, provider}), {
+  return new Response(renderLoginPage({origin, provider, authPath: url.pathname}), {
     status: 200,
     headers: noStoreHeaders(),
   });
@@ -198,6 +198,7 @@ async function handleGetAuth(request, env) {
 
 /** @param {Request} request @param {Env} env */
 async function handlePostAuth(request, env) {
+  const url = new URL(request.url);
   const form = await request.formData();
   const username = String(form.get('username') || '');
   const password = String(form.get('password') || '');
@@ -229,6 +230,7 @@ async function handlePostAuth(request, env) {
     return new Response(renderLoginPage({
       origin,
       provider,
+      authPath: url.pathname,
       errorText: 'Usuario o clave inválidos.',
     }), {
       status: 401,
