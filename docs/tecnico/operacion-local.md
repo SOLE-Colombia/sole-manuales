@@ -1,23 +1,23 @@
 ---
-title: Operación local con Docker
+title: Operación local
 sidebar_position: 4
 ---
 
-# Operación local con Docker y DevContainer
+# Operación local
 
 ## Enfoque oficial
 
-Usar DevContainer para asegurar entorno homogéneo.
+Usar Node.js y npm en entorno local.
 
 ## Requisitos
 
-- Docker Desktop / Docker Engine.
-- VS Code + Dev Containers.
+- Node.js 20+
+- npm 10+
 
 ## Arranque
 
 ```bash
-npm install
+npm ci
 npm run start
 ```
 
@@ -31,4 +31,4 @@ npm run build
 
 - Puerto ocupado: cambiar puerto local del server.
 - Fallo de dependencias: borrar `node_modules` e instalar de nuevo.
-- Problemas de permisos: reconstruir contenedor.
+- Problemas de permisos: revisar usuario local y permisos del repositorio.

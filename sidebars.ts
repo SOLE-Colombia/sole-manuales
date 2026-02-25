@@ -27,7 +27,7 @@ const sidebars: SidebarsConfig = {
         'cacharrero/deploy-y-entornos',
         'cacharrero/auditoria-y-vigencia',
         'cacharrero/politica-assets-remotos',
-        'cacharrero/cms-cloudflare-oauth',
+        'cacharrero/cms-usuario-clave',
         'cacharrero/implementacion-online',
       ],
     },

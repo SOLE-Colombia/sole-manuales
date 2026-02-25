@@ -91,8 +91,8 @@ const DEFAULT_HOME_CONFIG: HomeConfig = {
         {label: 'Operacion local', href: '/docs/cacharrero/operacion-local', external: false},
         {label: 'Deploy y entornos', href: '/docs/cacharrero/deploy-y-entornos', external: false},
         {
-          label: 'CMS Cloudflare OAuth',
-          href: '/docs/cacharrero/cms-cloudflare-oauth',
+          label: 'CMS usuario y clave',
+          href: '/docs/cacharrero/cms-usuario-clave',
           external: false,
         },
         {label: 'Repositorio', href: 'https://github.com/SOLE-Colombia/sole-manuales', external: true},

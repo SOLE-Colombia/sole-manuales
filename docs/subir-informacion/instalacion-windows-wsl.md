@@ -2,7 +2,7 @@
 title: Instalacion en Windows (WSL2)
 sidebar_position: 2
 owner_role: Editor
-last_reviewed: 2026-02-24
+last_reviewed: 2026-02-25
 status: published
 ---
 
@@ -11,22 +11,39 @@ status: published
 ## Software necesario
 
 - WSL: [learn.microsoft.com/windows/wsl/install](https://learn.microsoft.com/windows/wsl/install)
-- Docker Desktop: [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/)
+- Node.js 20+ (en WSL)
+- npm 10+ (en WSL)
 - VS Code: [code.visualstudio.com](https://code.visualstudio.com/)
-- Dev Containers extension
 - Obsidian: [obsidian.md/download](https://obsidian.md/download)
 - GitHub Desktop o GitKraken
+- Git CLI
 
 ## Pasos
 
 1. Instalar WSL2 (`wsl --install`).
-2. Activar integracion WSL en Docker Desktop.
-3. Clonar repositorio.
-4. Abrir en VS Code y usar `Reopen in Container`.
+2. Clonar repositorio en WSL:
+
+```bash
+git clone git@github.com:SOLE-Colombia/sole-manuales.git
+cd sole-manuales
+```
+
+3. Instalar dependencias:
+
+```bash
+npm ci
+```
+
+4. Levantar el portal:
+
+```bash
+npm run start
+```
+
 5. Abrir carpeta del repo en Obsidian.
 
 ## Verificacion final
 
-- Docker responde `docker --version`.
-- VS Code abre contenedor.
+- `npm run start` responde en `http://localhost:3000`.
+- `npm run check` termina sin error.
 - Obsidian y cliente Git apuntan al mismo repo.

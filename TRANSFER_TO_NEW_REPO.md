@@ -61,12 +61,12 @@ git push -u origin main
 2. Verificar `static/admin/config.yml`.
 3. Abrir `https://manual.solecolombia.org/admin/` tras el primer deploy.
 
-## 8) Activar OAuth en Cloudflare para CMS
+## 8) Activar login usuario/clave en Cloudflare para CMS
 
-1. Crear GitHub OAuth App:
-   - Homepage URL: `https://auth.manual.solecolombia.org`
-   - Callback URL: `https://auth.manual.solecolombia.org/callback`
-2. Desplegar proxy OAuth en Cloudflare Worker.
+1. Desplegar Worker `workers/cms-auth/` en `auth.manual.solecolombia.org`.
+2. Cargar secretos:
+   - `CMS_LOGIN_PASSWORD`
+   - `CMS_GITHUB_TOKEN`
 3. Confirmar `base_url` y `auth_endpoint` en `static/admin/config.yml`.
 4. Verificar login en `https://manual.solecolombia.org/admin/`.
 
@@ -75,7 +75,7 @@ git push -u origin main
 - `https://manual.solecolombia.org` responde.
 - Navegación v1 (`cacharrero` y `subir-informacion`) correcta.
 - CI en verde y PR con aprobación obligatoria.
-- Login CMS funcional con Cloudflare OAuth.
+- Login CMS funcional con usuario/clave.
 
 ## 10) Desacople definitivo con `voltaje-dev`
 

@@ -19,6 +19,7 @@ Se incluye `docs/legacy/` como historico no operativo.
 
 - Node.js 20+
 - npm 10+
+- Git
 
 ## Desarrollo local
 
@@ -26,6 +27,10 @@ Se incluye `docs/legacy/` como historico no operativo.
 npm ci
 npm run start
 ```
+
+El sitio queda disponible en `http://localhost:3000`.
+
+No se usa Docker/DevContainer en el flujo oficial de este repositorio.
 
 ## Build y validacion
 
@@ -40,8 +45,8 @@ Salida estática en `build/`.
 - URL: `https://manual.solecolombia.org/admin/`
 - Configuracion: `static/admin/config.yml`
 - Modo de publicacion: `editorial_workflow`
-- OAuth proxy: `https://auth.manual.solecolombia.org` (Cloudflare Worker)
-- Callback OAuth esperado: `https://auth.manual.solecolombia.org/callback`
+- Auth de acceso: usuario/clave via Worker (`workers/cms-auth/`).
+- Guia operativa: `docs/cacharrero/cms-usuario-clave.md`.
 
 Usa CMS cuando el cambio sea solo contenido (`docs/`, `static/uploads/` y `static/data/homepage.json`).
 
@@ -91,7 +96,7 @@ npm run start
 - Workflow: `.github/workflows/deploy-pages.yml`
 - Dominio: `manual.solecolombia.org`
 - CNAME esperado: `manual -> SOLE-Colombia.github.io`
-- Dominio de auth CMS: `auth.manual.solecolombia.org` (Cloudflare Worker)
+- Servicio de autenticacion CMS: `auth.manual.solecolombia.org` (Worker).
 
 ## Publicar como repo independiente
 

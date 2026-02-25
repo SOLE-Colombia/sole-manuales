@@ -15,7 +15,7 @@ Esta sección describe la arquitectura, el despliegue y la operación del manual
 
 - Infraestructura distribuida.
 - Despliegue en GitHub Pages.
-- Operación local con Docker y DevContainer.
+- Operación local con Node.js y npm.
 - Auditoría de configuración y riesgos.
 
 ## Referencias de origen

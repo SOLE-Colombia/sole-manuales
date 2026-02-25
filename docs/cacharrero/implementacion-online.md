@@ -2,7 +2,7 @@
 title: Implementacion online del repositorio
 sidebar_position: 8
 owner_role: Cacharrero
-last_reviewed: 2026-02-24
+last_reviewed: 2026-02-25
 status: published
 ---
 
@@ -53,20 +53,20 @@ git push -u origin main
 - Endpoint: `/admin`
 - Configuracion: `static/admin/config.yml`
 - Flujo: `editorial_workflow`
-- OAuth proxy en Cloudflare: ver [CMS con Cloudflare OAuth](./cms-cloudflare-oauth.md).
+- Login usuario/clave via Worker: ver [CMS con usuario y clave](./cms-usuario-clave.md).
 
 ## 6) Fases de autenticacion
 
 ### Fase 1
 
-- Login GitHub para miembros de `SOLE-Colombia`.
+- Login con usuario/clave para equipo editorial.
 
 ### Fase 2
 
-- Gateway de identidad para `/admin` con:
-  - GitHub org
-  - Google Workspace (`solecolombia.org`)
-  - Usuario local `admin`
+- Endurecimiento de seguridad:
+  - rotacion de claves,
+  - auditoria de accesos,
+  - rate limit y bloqueo por intentos fallidos.
 
 ## 7) Politica de imagenes de marca
 

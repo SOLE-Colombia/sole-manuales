@@ -2,7 +2,7 @@
 title: Instalacion en macOS y Linux
 sidebar_position: 3
 owner_role: Editor
-last_reviewed: 2026-02-24
+last_reviewed: 2026-02-25
 status: published
 ---
 
@@ -10,21 +10,39 @@ status: published
 
 ## Software necesario
 
-- Docker Desktop (macOS) o Docker Engine (Linux)
-- VS Code + Dev Containers
+- Node.js 20+
+- npm 10+
+- VS Code (opcional)
 - Obsidian
 - GitHub Desktop o GitKraken
+- Git CLI
 
 ## Pasos
 
 1. Instalar herramientas base.
-2. Verificar Docker en estado activo.
-3. Clonar repositorio y abrir en VS Code.
-4. Reabrir en contenedor.
-5. Abrir el repo en Obsidian.
+2. Clonar repositorio:
+
+```bash
+git clone git@github.com:SOLE-Colombia/sole-manuales.git
+cd sole-manuales
+```
+
+3. Instalar dependencias:
+
+```bash
+npm ci
+```
+
+4. Levantar el portal:
+
+```bash
+npm run start
+```
+
+5. Abrir el repo en Obsidian para editar contenido.
 
 ## Verificacion final
 
-- Docker funcional.
-- Contenedor operativo.
+- `npm run start` responde en `http://localhost:3000`.
+- `npm run check` termina sin error.
 - Edicion de notas habilitada.

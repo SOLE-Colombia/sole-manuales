@@ -2,7 +2,7 @@
 title: Arquitectura de plataforma
 sidebar_position: 2
 owner_role: Cacharrero
-last_reviewed: 2026-02-24
+last_reviewed: 2026-02-25
 status: published
 ---
 
@@ -15,7 +15,7 @@ status: published
 - Hosting: GitHub Pages.
 - Dominio: `manual.solecolombia.org`.
 - Edicion online: Decap CMS en `/admin`.
-- Auth CMS: OAuth proxy en `auth.manual.solecolombia.org` (Cloudflare Worker).
+- Auth CMS: login usuario/clave en `auth.manual.solecolombia.org` (Cloudflare Worker).
 
 ## Estructura base
 

@@ -1,0 +1,286 @@
+const DEFAULT_ALLOWED_ORIGINS = ['https://manual.solecolombia.org', 'http://localhost:3000'];
+
+/** @typedef {{ CMS_LOGIN_USER?: string, CMS_LOGIN_PASSWORD?: string, CMS_GITHUB_TOKEN?: string, ALLOWED_ORIGINS?: string }} Env */
+
+/** @param {string} value */
+function normalizeOrigin(value) {
+  if (!value) return null;
+  try {
+    const url = new URL(value);
+    return `${url.protocol}//${url.host}`;
+  } catch {
+    return null;
+  }
+}
+
+/** @param {Env} env */
+function parseAllowedOrigins(env) {
+  const raw = (env.ALLOWED_ORIGINS || '').trim();
+  if (!raw) return DEFAULT_ALLOWED_ORIGINS;
+  const parsed = raw
+    .split(',')
+    .map((item) => normalizeOrigin(item.trim()))
+    .filter(Boolean);
+  return parsed.length > 0 ? parsed : DEFAULT_ALLOWED_ORIGINS;
+}
+
+/**
+ * Compare strings in fixed-time style to reduce timing leaks.
+ * @param {string} left
+ * @param {string} right
+ */
+function constantTimeEqual(left, right) {
+  const encoder = new TextEncoder();
+  const a = encoder.encode(left);
+  const b = encoder.encode(right);
+  const maxLen = Math.max(a.length, b.length);
+
+  let mismatch = a.length ^ b.length;
+  for (let i = 0; i < maxLen; i += 1) {
+    mismatch |= (a[i] || 0) ^ (b[i] || 0);
+  }
+  return mismatch === 0;
+}
+
+function noStoreHeaders(contentType = 'text/html; charset=utf-8') {
+  return {
+    'content-type': contentType,
+    'cache-control': 'no-store, no-cache, must-revalidate, max-age=0',
+    pragma: 'no-cache',
+    expires: '0',
+    'x-content-type-options': 'nosniff',
+    'x-frame-options': 'DENY',
+    'referrer-policy': 'same-origin',
+  };
+}
+
+/** @param {string} input */
+function escapeHtml(input) {
+  return input
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+/**
+ * @param {{ errorText?: string, origin: string, provider: string }} args
+ */
+function renderLoginPage({errorText, origin, provider}) {
+  const errorBanner = errorText
+    ? `<p style="background:#fee2e2;color:#991b1b;padding:10px;border-radius:8px;">${escapeHtml(errorText)}</p>`
+    : '';
+
+  return `<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ingreso CMS SOLE</title>
+    <style>
+      :root { color-scheme: light; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+      }
+      .card {
+        width: min(440px, calc(100vw - 40px));
+        background: #ffffff;
+        border: 2px solid #0f172a;
+        border-radius: 14px;
+        box-shadow: 8px 8px 0 #0f172a;
+        padding: 22px;
+      }
+      h1 { margin: 0 0 6px; font-size: 1.45rem; color: #0f172a; }
+      p { color: #334155; margin: 0 0 16px; }
+      label { display: block; margin: 12px 0 6px; font-weight: 600; color: #0f172a; }
+      input {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid #94a3b8;
+        box-sizing: border-box;
+      }
+      button {
+        margin-top: 16px;
+        width: 100%;
+        padding: 11px 14px;
+        border-radius: 8px;
+        border: 1px solid #0f172a;
+        background: #0f172a;
+        color: #ffffff;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .note {
+        margin-top: 12px;
+        font-size: 0.83rem;
+        color: #475569;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>Ingreso al CMS</h1>
+      <p>Usa tu usuario y clave editorial para continuar.</p>
+      ${errorBanner}
+      <form method="post" action="/auth">
+        <input type="hidden" name="origin" value="${escapeHtml(origin)}" />
+        <input type="hidden" name="provider" value="${escapeHtml(provider)}" />
+
+        <label for="username">Usuario</label>
+        <input id="username" name="username" autocomplete="username" required />
+
+        <label for="password">Clave</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required />
+
+        <button type="submit">Ingresar</button>
+      </form>
+      <p class="note">Acceso restringido a equipo editorial autorizado.</p>
+    </main>
+  </body>
+</html>`;
+}
+
+/**
+ * @param {{ origin: string, provider: string, token: string }} args
+ */
+function renderSuccessPopup({origin, provider, token}) {
+  const targetOrigin = JSON.stringify(origin);
+  const providerValue = JSON.stringify(provider);
+  const payload = JSON.stringify({token, provider});
+  const payloadLiteral = JSON.stringify(payload);
+
+  return `<!doctype html>
+<html lang="es"><body>
+<script>
+  (function () {
+    var target = ${targetOrigin};
+    var provider = ${providerValue};
+    var payload = ${payloadLiteral};
+
+    if (window.opener) {
+      try {
+        window.opener.postMessage('authorizing:' + provider, target);
+        window.opener.postMessage('authorization:' + provider + ':success:' + payload, target);
+        window.opener.postMessage({type: 'authorization_success', provider: provider}, target);
+      } catch (_) {}
+    }
+
+    window.close();
+  })();
+</script>
+<p>Login exitoso. Si esta ventana no se cierra, ciérrala manualmente.</p>
+</body></html>`;
+}
+
+/** @param {Request} request @param {Env} env */
+async function handleGetAuth(request, env) {
+  const allowedOrigins = parseAllowedOrigins(env);
+  const url = new URL(request.url);
+
+  const queryOrigin = normalizeOrigin(url.searchParams.get('origin') || '');
+  const origin = queryOrigin && allowedOrigins.includes(queryOrigin) ? queryOrigin : allowedOrigins[0];
+  const provider = (url.searchParams.get('provider') || 'github').toLowerCase();
+
+  return new Response(renderLoginPage({origin, provider}), {
+    status: 200,
+    headers: noStoreHeaders(),
+  });
+}
+
+/** @param {Request} request @param {Env} env */
+async function handlePostAuth(request, env) {
+  const form = await request.formData();
+  const username = String(form.get('username') || '');
+  const password = String(form.get('password') || '');
+  const provider = String(form.get('provider') || 'github').toLowerCase();
+
+  const allowedOrigins = parseAllowedOrigins(env);
+  const requestedOrigin = normalizeOrigin(String(form.get('origin') || ''));
+  const origin = requestedOrigin && allowedOrigins.includes(requestedOrigin)
+    ? requestedOrigin
+    : allowedOrigins[0];
+
+  const expectedUser = env.CMS_LOGIN_USER || '';
+  const expectedPassword = env.CMS_LOGIN_PASSWORD || '';
+  const githubToken = env.CMS_GITHUB_TOKEN || '';
+
+  if (!expectedUser || !expectedPassword || !githubToken) {
+    return new Response(
+      'Missing worker secrets. Set CMS_LOGIN_USER, CMS_LOGIN_PASSWORD and CMS_GITHUB_TOKEN.',
+      {status: 500, headers: noStoreHeaders('text/plain; charset=utf-8')},
+    );
+  }
+
+  const isValidUser = constantTimeEqual(username, expectedUser);
+  const isValidPassword = constantTimeEqual(password, expectedPassword);
+
+  if (!isValidUser || !isValidPassword) {
+    await new Promise((resolve) => setTimeout(resolve, 750));
+
+    return new Response(renderLoginPage({
+      origin,
+      provider,
+      errorText: 'Usuario o clave inválidos.',
+    }), {
+      status: 401,
+      headers: noStoreHeaders(),
+    });
+  }
+
+  return new Response(
+    renderSuccessPopup({origin, provider, token: githubToken}),
+    {status: 200, headers: noStoreHeaders()},
+  );
+}
+
+/** @param {Request} request */
+function handleHealth(request) {
+  const url = new URL(request.url);
+  const body = JSON.stringify({ok: true, service: 'cms-auth-worker', path: url.pathname});
+  return new Response(body, {
+    status: 200,
+    headers: noStoreHeaders('application/json; charset=utf-8'),
+  });
+}
+
+/** @type {ExportedHandler<Env>} */
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    if (request.method === 'OPTIONS') {
+      return new Response(null, {status: 204, headers: noStoreHeaders()});
+    }
+
+    if (url.pathname === '/healthz') {
+      return handleHealth(request);
+    }
+
+    if (url.pathname === '/auth' && request.method === 'GET') {
+      return handleGetAuth(request, env);
+    }
+
+    if (url.pathname === '/auth' && request.method === 'POST') {
+      return handlePostAuth(request, env);
+    }
+
+    if (url.pathname === '/callback') {
+      return new Response(
+        'This worker uses /auth directly (no OAuth callback needed).',
+        {status: 200, headers: noStoreHeaders('text/plain; charset=utf-8')},
+      );
+    }
+
+    return new Response('Not Found', {
+      status: 404,
+      headers: noStoreHeaders('text/plain; charset=utf-8'),
+    });
+  },
+};

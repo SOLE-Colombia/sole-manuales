@@ -11,10 +11,10 @@ sidebar_position: 2
 - GitHub Desktop: [desktop.github.com](https://desktop.github.com/)
 - GitKraken: [gitkraken.com/download](https://www.gitkraken.com/download)
 - VS Code: [code.visualstudio.com](https://code.visualstudio.com/)
-- Docker Desktop: [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/)
+- Node.js: [nodejs.org](https://nodejs.org/)
 
 ## Recomendación de uso
 
 - Usa **un solo cliente Git visual** a la vez.
-- Mantén Docker y VS Code actualizados.
+- Mantén Node.js y VS Code actualizados.
 - Trabaja siempre sobre el repositorio correcto (evita copias locales duplicadas).

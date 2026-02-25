@@ -2,8 +2,8 @@ backend:
   name: github
   repo: SOLE-Colombia/sole-manuales
   branch: main
-  # Acceso esperado: miembros autorizados del equipo SOLE con permisos en el repo.
-  # OAuth proxy desplegado en Cloudflare Worker.
+  # Login CMS por usuario/clave via Cloudflare Worker:
+  # workers/cms-auth/
   base_url: https://auth.manual.solecolombia.org
   auth_endpoint: /auth
 

@@ -2,7 +2,7 @@
 title: Cacharrero
 sidebar_position: 1
 owner_role: Cacharrero
-last_reviewed: 2026-02-24
+last_reviewed: 2026-02-25
 status: published
 ---
 
@@ -23,7 +23,7 @@ Esta ruta documenta el funcionamiento tecnico de la plataforma de manuales y su 
 3. Deploy y entornos online.
 4. Auditoria y vigencia mensual.
 5. [Politica de assets remotos para branding](./politica-assets-remotos.md).
-6. [Activacion de CMS con Cloudflare OAuth](./cms-cloudflare-oauth.md).
+6. [CMS con usuario y clave](./cms-usuario-clave.md).
 7. [Guia de implementacion completa para repositorio independiente](./implementacion-online.md).
 
 ## Regla de trabajo
