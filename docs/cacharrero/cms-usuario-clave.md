@@ -13,7 +13,7 @@ Esta guia activa el ingreso simple por `usuario + clave` para el CMS sin depende
 ## Estado implementado
 
 - Worker de auth en `workers/cms-auth/`.
-- Dominio de auth: `https://auth.manual.solecolombia.org/auth`.
+- Dominio de auth: `https://auth.manual.solecolombia.org/auth/v2`.
 - Backend Decap en `static/admin/config.yml`:
 
 ```yml
@@ -22,14 +22,14 @@ backend:
   repo: SOLE-Colombia/sole-manuales
   branch: main
   base_url: https://auth.manual.solecolombia.org
-  auth_endpoint: /auth
+  auth_endpoint: /auth/v2
 publish_mode: editorial_workflow
 ```
 
 ## Como funciona
 
 1. Usuario abre `https://manual.solecolombia.org/admin/`.
-2. Decap abre popup a `/auth`.
+2. Decap abre popup a `/auth/v2`.
 3. Worker valida `usuario + clave`.
 4. Worker responde a Decap con token GitHub de servicio.
 5. Decap crea ramas, commits y PR en `SOLE-Colombia/sole-manuales`.
