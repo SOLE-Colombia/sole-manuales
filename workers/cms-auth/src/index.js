@@ -1,4 +1,6 @@
 const DEFAULT_ALLOWED_ORIGINS = ['https://manual.solecolombia.org', 'http://localhost:3000'];
+const AUTH_PATHS = new Set(['/auth', '/auth/v2']);
+const CALLBACK_PATHS = new Set(['/callback', '/callback/v2']);
 
 /** @typedef {{ CMS_LOGIN_USER?: string, CMS_LOGIN_PASSWORD?: string, CMS_GITHUB_TOKEN?: string, ALLOWED_ORIGINS?: string }} Env */
 
@@ -263,15 +265,15 @@ export default {
       return handleHealth(request);
     }
 
-    if (url.pathname === '/auth' && request.method === 'GET') {
+    if (AUTH_PATHS.has(url.pathname) && request.method === 'GET') {
       return handleGetAuth(request, env);
     }
 
-    if (url.pathname === '/auth' && request.method === 'POST') {
+    if (AUTH_PATHS.has(url.pathname) && request.method === 'POST') {
       return handlePostAuth(request, env);
     }
 
-    if (url.pathname === '/callback') {
+    if (CALLBACK_PATHS.has(url.pathname)) {
       return new Response(
         'This worker uses /auth directly (no OAuth callback needed).',
         {status: 200, headers: noStoreHeaders('text/plain; charset=utf-8')},

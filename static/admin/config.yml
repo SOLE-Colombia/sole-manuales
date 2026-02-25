@@ -5,7 +5,7 @@ backend:
   # Login CMS por usuario/clave via Cloudflare Worker:
   # workers/cms-auth/
   base_url: https://auth.manual.solecolombia.org
-  auth_endpoint: /auth
+  auth_endpoint: /auth/v2
 
 publish_mode: editorial_workflow
 
