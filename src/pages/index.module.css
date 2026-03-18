@@ -82,7 +82,7 @@
 
 .sectionGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -93,33 +93,48 @@
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.5rem;
 }
 
 .roleCard h3 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
+  line-height: 1.2;
 }
 
 .roleCard p {
   margin: 0;
   color: #374151;
-  min-height: 4rem;
+  font-size: 0.88rem;
+  min-height: 3rem;
+}
+
+.personBadge {
+  display: inline-block;
+  background: #f3f4f6;
+  color: #374151;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  width: fit-content;
 }
 
 .openRoute {
   width: fit-content;
   box-shadow: none !important;
   border-width: 1px !important;
+  font-size: 0.85rem !important;
 }
 
 .quickLinks {
   margin: 0;
   padding-left: 1rem;
+  font-size: 0.85rem;
 }
 
 .quickLinks li {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
 }
 
 .foundationLinks {
@@ -139,6 +154,12 @@
   color: #111827;
   text-decoration: none;
   background: #ffffff;
+}
+
+@media screen and (max-width: 1200px) {
+  .sectionGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media screen and (max-width: 996px) {

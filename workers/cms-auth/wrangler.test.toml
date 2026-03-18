@@ -7,12 +7,11 @@ workers_dev = true
 # No usa custom domain; Cloudflare lo publica en *.workers.dev.
 
 [vars]
-# Permite usar login desde local y desde el dominio real del CMS.
-ALLOWED_ORIGINS = "http://localhost:3000,https://manual.solecolombia.org"
+ALLOWED_ORIGINS = "http://localhost:3000,https://manual.solecolombia.org,https://intranet.solecolombia.org"
 
-# Usuario de prueba para el formulario.
-CMS_LOGIN_USER = "editor-test"
-
-# Secretos requeridos (setear con --config wrangler.test.toml):
-# npx wrangler secret put CMS_LOGIN_PASSWORD --config wrangler.test.toml
-# npx wrangler secret put CMS_GITHUB_TOKEN --config wrangler.test.toml
+# Secretos de prueba (setear con --config wrangler.test.toml):
+#   npx wrangler secret put CMS_USERS --config wrangler.test.toml
+#   npx wrangler secret put CMS_GITHUB_TOKEN --config wrangler.test.toml
+#
+# Formato CMS_USERS: JSON array, p.ej:
+#   [{"user":"test@solecolombia.org","password":"test123","name":"Test User","role":"Editor"}]

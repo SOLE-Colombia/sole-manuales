@@ -1,16 +1,16 @@
 {
   "hero": {
-    "eyebrow": "Fundacion SOLE Colombia",
-    "title": "Manuales para operar, publicar y sostener el conocimiento",
-    "subtitle": "Ruta clara para equipos tecnicos y no tecnicos. Empieza por tu rol, sigue el flujo y publica con revision editorial.",
+    "eyebrow": "Fundación SOLE Colombia",
+    "title": "Intranet — Fuente de la verdad del equipo",
+    "subtitle": "Cada rol tiene su espacio para documentar, publicar y consultar. Encuentra tu sección y empieza a construir conocimiento.",
     "background_image": "https://cdn.prod.website-files.com/63be04f0fe7d2f045f57f2d2/67619dc00a48333410dd56e0_IMG_7056-p-500.jpg",
     "primary_cta": {
-      "label": "Empezar a subir informacion",
-      "href": "/docs/subir-informacion/overview",
-      "external": false
+      "label": "Ir al Editor",
+      "href": "https://intranet.solecolombia.org/admin/",
+      "external": true
     },
     "secondary_cta": {
-      "label": "Ir a Cacharrero",
+      "label": "Guía técnica",
       "href": "/docs/cacharrero/overview",
       "external": false
     }
@@ -21,169 +21,120 @@
   },
   "roles": [
     {
-      "role_id": "editor",
-      "label": "Editor",
-      "description": "Crea y actualiza contenido en Markdown con flujo guiado de publicacion.",
-      "start_path": "/docs/subir-informacion/overview",
+      "role_id": "cuentera-storyteller",
+      "label": "Cuentera / Storyteller",
+      "person": "Natalia Torres",
+      "description": "Historias, narrativas y contenido editorial.",
+      "start_path": "/docs/cuentera-storyteller/overview",
       "quick_links": [
-        {
-          "label": "Markdown basico",
-          "href": "/docs/subir-informacion/markdown-basico",
-          "external": false
-        },
-        {
-          "label": "Checklist de publicacion",
-          "href": "/docs/subir-informacion/checklist-publicacion",
-          "external": false
-        },
-        {
-          "label": "Voltaje",
-          "href": "https://voltaje.solecolombia.org",
-          "external": true
-        }
+        {"label": "Mi sección", "href": "/docs/cuentera-storyteller/overview", "external": false},
+        {"label": "Editor online", "href": "/admin/#/collections/cuentera-storyteller", "external": true}
       ]
     },
     {
-      "role_id": "cacharrero",
-      "label": "Cacharrero",
-      "description": "Mantiene arquitectura, despliegue y operacion tecnica del portal de manuales.",
-      "start_path": "/docs/cacharrero/overview",
+      "role_id": "maestre-construccion",
+      "label": "Maestre de la construcción",
+      "person": "Julian Ruíz",
+      "description": "Procesos de construcción, metodologías y recursos técnicos.",
+      "start_path": "/docs/maestre-construccion/overview",
       "quick_links": [
-        {
-          "label": "Operacion local",
-          "href": "/docs/cacharrero/operacion-local",
-          "external": false
-        },
-        {
-          "label": "Deploy y entornos",
-          "href": "/docs/cacharrero/deploy-y-entornos",
-          "external": false
-        },
-        {
-          "label": "CMS usuario y clave",
-          "href": "/docs/cacharrero/cms-usuario-clave",
-          "external": false
-        },
-        {
-          "label": "Repositorio",
-          "href": "https://github.com/SOLE-Colombia/sole-manuales",
-          "external": true
-        }
+        {"label": "Mi sección", "href": "/docs/maestre-construccion/overview", "external": false},
+        {"label": "Editor online", "href": "/admin/#/collections/maestre-construccion", "external": true}
       ]
     },
     {
-      "role_id": "direccion-voltaje",
-      "label": "Direccion de Voltaje",
-      "description": "Aprueba cambios estrategicos y valida lineamientos de publicacion.",
-      "start_path": "/docs/cacharrero/auditoria-y-vigencia",
+      "role_id": "jardinera-proyectos",
+      "label": "Jardinera de proyectos",
+      "person": "Ana Caro Alonso",
+      "description": "Gestión de proyectos, conexiones y rutas de trabajo.",
+      "start_path": "/docs/jardinera-proyectos/overview",
       "quick_links": [
-        {
-          "label": "Auditoria y vigencia",
-          "href": "/docs/cacharrero/auditoria-y-vigencia",
-          "external": false
-        },
-        {
-          "label": "Implementacion online",
-          "href": "/docs/cacharrero/implementacion-online",
-          "external": false
-        },
-        {
-          "label": "Sitio SOLE",
-          "href": "https://solecolombia.org",
-          "external": true
-        }
+        {"label": "Mi sección", "href": "/docs/jardinera-proyectos/overview", "external": false},
+        {"label": "Editor online", "href": "/admin/#/collections/jardinera-proyectos", "external": true}
       ]
     },
     {
-      "role_id": "administrativo",
-      "label": "Administrativo",
-      "description": "Consulta rutas operativas, publicaciones vigentes y accesos institucionales.",
-      "start_path": "/docs/subir-informacion/checklist-publicacion",
+      "role_id": "arquitecta-futuros",
+      "label": "Arquitecta de futuros",
+      "person": "Isabel Tafur",
+      "description": "Estrategias, escenarios futuros y planificación organizacional.",
+      "start_path": "/docs/arquitecta-futuros/overview",
       "quick_links": [
-        {
-          "label": "Flujo editorial",
-          "href": "/docs/subir-informacion/flujo-editorial",
-          "external": false
-        },
-        {
-          "label": "Politica de colaboracion",
-          "href": "/docs/subir-informacion/politica-colaboracion",
-          "external": false
-        },
-        {
-          "label": "Fundacion SOLE",
-          "href": "https://solecolombia.org",
-          "external": true
-        }
+        {"label": "Mi sección", "href": "/docs/arquitecta-futuros/overview", "external": false},
+        {"label": "Editor online", "href": "/admin/#/collections/arquitecta-futuros", "external": true}
       ]
     },
     {
-      "role_id": "gestion-conocimiento",
-      "label": "Gestion del conocimiento",
-      "description": "Define vigencia documental y coordina calidad editorial en cada ciclo.",
-      "start_path": "/docs/subir-informacion/politica-colaboracion",
+      "role_id": "investigador",
+      "label": "Investigador",
+      "person": "Daniel Martínez",
+      "description": "Investigaciones, hallazgos y publicaciones académicas.",
+      "start_path": "/docs/investigador/overview",
       "quick_links": [
-        {
-          "label": "Politica de colaboracion",
-          "href": "/docs/subir-informacion/politica-colaboracion",
-          "external": false
-        },
-        {
-          "label": "Laboratorio Markdown",
-          "href": "/docs/subir-informacion/laboratorio-markdown",
-          "external": false
-        },
-        {
-          "label": "Editor online",
-          "href": "https://manual.solecolombia.org/admin/",
-          "external": true
-        }
+        {"label": "Mi sección", "href": "/docs/investigador/overview", "external": false},
+        {"label": "Editor online", "href": "/admin/#/collections/investigador", "external": true}
       ]
     },
     {
-      "role_id": "jardinera-conexiones",
-      "label": "Jardinera de conexiones",
-      "description": "Conecta contenidos, rutas y equipos para facilitar publicacion sin friccion.",
-      "start_path": "/docs/subir-informacion/flujo-editorial",
+      "role_id": "artista-datos",
+      "label": "Artista de datos",
+      "person": "Mateo Moreno",
+      "description": "Visualizaciones, análisis de datos y métricas de impacto.",
+      "start_path": "/docs/artista-datos/overview",
       "quick_links": [
-        {
-          "label": "Subir con GitHub Desktop",
-          "href": "/docs/subir-informacion/subir-con-github-desktop",
-          "external": false
-        },
-        {
-          "label": "Subir con GitKraken",
-          "href": "/docs/subir-informacion/subir-con-gitkraken",
-          "external": false
-        },
-        {
-          "label": "Comunidad SOLE",
-          "href": "https://www.solecolombia.org",
-          "external": true
-        }
+        {"label": "Mi sección", "href": "/docs/artista-datos/overview", "external": false},
+        {"label": "Editor online", "href": "/admin/#/collections/artista-datos", "external": true}
+      ]
+    },
+    {
+      "role_id": "fundador-tenaz",
+      "label": "Fundador Tenaz",
+      "person": "Sanjay Fernandes",
+      "description": "Visión fundacional, gestión estratégica y liderazgo.",
+      "start_path": "/docs/fundador-tenaz/overview",
+      "quick_links": [
+        {"label": "Mi sección", "href": "/docs/fundador-tenaz/overview", "external": false},
+        {"label": "Editor online", "href": "/admin/#/collections/fundador-tenaz", "external": true}
+      ]
+    },
+    {
+      "role_id": "polo-a-tierra",
+      "label": "Polo a Tierra",
+      "person": "Lizeth Naranjo",
+      "description": "Procesos operativos, logística y coordinación de campo.",
+      "start_path": "/docs/polo-a-tierra/overview",
+      "quick_links": [
+        {"label": "Mi sección", "href": "/docs/polo-a-tierra/overview", "external": false},
+        {"label": "Editor online", "href": "/admin/#/collections/polo-a-tierra", "external": true}
+      ]
+    },
+    {
+      "role_id": "estratega-sole-voltaje",
+      "label": "Estratega sole voltaje",
+      "person": "Catalina Ramírez",
+      "description": "Estrategias de Voltaje, planeación y gestión de impacto.",
+      "start_path": "/docs/estratega-sole-voltaje/overview",
+      "quick_links": [
+        {"label": "Mi sección", "href": "/docs/estratega-sole-voltaje/overview", "external": false},
+        {"label": "Editor online", "href": "/admin/#/collections/estratega-sole-voltaje", "external": true}
+      ]
+    },
+    {
+      "role_id": "anarqueologo-medios",
+      "label": "Anarqueologo de los medios",
+      "person": "David Vega",
+      "description": "Estrategias de medios, comunicación y tecnología.",
+      "start_path": "/docs/anarqueologo-medios/overview",
+      "quick_links": [
+        {"label": "Mi sección", "href": "/docs/anarqueologo-medios/overview", "external": false},
+        {"label": "Editor online", "href": "/admin/#/collections/anarqueologo-medios", "external": false}
       ]
     }
   ],
   "quick_access": [
-    {
-      "label": "SOLE Colombia",
-      "href": "https://solecolombia.org",
-      "external": true
-    },
-    {
-      "label": "Voltaje",
-      "href": "https://voltaje.solecolombia.org",
-      "external": true
-    },
-    {
-      "label": "Repositorio de manuales",
-      "href": "https://github.com/SOLE-Colombia/sole-manuales",
-      "external": true
-    },
-    {
-      "label": "Editor online",
-      "href": "https://manual.solecolombia.org/admin/",
-      "external": true
-    }
+    {"label": "SOLE Colombia", "href": "https://solecolombia.org", "external": true},
+    {"label": "Voltaje", "href": "https://voltaje.solecolombia.org", "external": true},
+    {"label": "Repositorio", "href": "https://github.com/SOLE-Colombia/sole-manuales", "external": true},
+    {"label": "Editor online", "href": "https://intranet.solecolombia.org/admin/", "external": true}
   ]
 }

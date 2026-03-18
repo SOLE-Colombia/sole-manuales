@@ -1,19 +1,29 @@
-# Manuales SOLE (Docusaurus)
+# Intranet SOLE (Docusaurus)
 
-Portal de manuales independiente para SOLE Colombia, pensado para publicarse en `manual.solecolombia.org`.
+Intranet y fuente de la verdad del equipo SOLE Colombia, publicada en `intranet.solecolombia.org`.
 
-- Portal publico: `https://manual.solecolombia.org`
-- Repositorio fuente: `https://github.com/SOLE-Colombia/sole-manuales`
-- Editor CMS: `https://manual.solecolombia.org/admin/`
+- Portal: `https://intranet.solecolombia.org`
+- Repositorio: `https://github.com/SOLE-Colombia/sole-manuales`
+- Editor CMS: `https://intranet.solecolombia.org/admin/`
 
-## Alcance v1
+## Equipo y roles
 
-Dos rutas operativas:
+| Rol | Persona | Sección |
+|-----|---------|---------|
+| Cuentera / Storyteller | Natalia Torres | `docs/cuentera-storyteller/` |
+| Maestre de la construcción | Julian Ruíz | `docs/maestre-construccion/` |
+| Jardinera de proyectos | Ana Caro Alonso | `docs/jardinera-proyectos/` |
+| Arquitecta de futuros | Isabel Tafur | `docs/arquitecta-futuros/` |
+| Investigador | Daniel Martínez | `docs/investigador/` |
+| Artista de datos | Mateo Moreno | `docs/artista-datos/` |
+| Fundador Tenaz | Sanjay Fernandes | `docs/fundador-tenaz/` |
+| Polo a Tierra | Lizeth Naranjo | `docs/polo-a-tierra/` |
+| Estratega sole voltaje | Catalina Ramírez | `docs/estratega-sole-voltaje/` |
+| Anarqueologo de los medios | David Vega | `docs/anarqueologo-medios/` |
 
-- `docs/cacharrero/`: informacion tecnica de plataforma y operacion online.
-- `docs/subir-informacion/`: ruta no tecnica para crear y publicar contenido.
-
-Se incluye `docs/legacy/` como historico no operativo.
+Además:
+- `docs/cacharrero/`: documentación técnica de la plataforma.
+- `docs/legacy/`: histórico no operativo.
 
 ## Requisitos
 
@@ -30,80 +40,39 @@ npm run start
 
 El sitio queda disponible en `http://localhost:3000`.
 
-No se usa Docker/DevContainer en el flujo oficial de este repositorio.
-
-## Build y validacion
+## Build y validación
 
 ```bash
 npm run check
 ```
 
-Salida estática en `build/`.
+## Edición online (Decap CMS)
 
-## Edicion online (Decap CMS)
+- URL: `https://intranet.solecolombia.org/admin/`
+- Configuración: `static/admin/config.yml`
+- Auth: correo + clave via Worker (`workers/cms-auth/`).
+- Guía: `docs/cacharrero/cms-usuario-clave.md`.
 
-- URL: `https://manual.solecolombia.org/admin/`
-- Configuracion: `static/admin/config.yml`
-- Modo de publicacion: `editorial_workflow`
-- Auth de acceso: usuario/clave via Worker (`workers/cms-auth/`).
-- Guia operativa: `docs/cacharrero/cms-usuario-clave.md`.
+## Autenticación del CMS
 
-Usa CMS cuando el cambio sea solo contenido (`docs/`, `static/uploads/` y `static/data/homepage.json`).
+El Worker de autenticación soporta **múltiples usuarios** con correo y clave.
 
-## Politica de imagenes
+- Los usuarios se configuran como secreto cifrado `CMS_USERS` en Cloudflare.
+- Los secretos **no están en el repositorio**.
+- Guía completa: `docs/cacharrero/cms-usuario-clave.md`.
 
-- Para branding del home usar URLs oficiales de `solecolombia.org` (CDN oficial).
-- Mantener local solo favicon y logo fallback.
-- Configuracion editable de home: `static/data/homepage.json`.
+Endpoints del Worker:
 
-## Cuando usar git clone
-
-Usa clon local del repo `sole-manuales` cuando necesites:
-
-- Cambiar configuracion (`docusaurus.config.*`, `sidebars.*`)
-- Ajustar componentes/UI (`src/`)
-- Cambiar workflows, CODEOWNERS o reglas de CI
-- Resolver errores de build o enlaces
-
-Comandos base:
-
-```bash
-git clone git@github.com:SOLE-Colombia/sole-manuales.git
-cd sole-manuales
-npm ci
-npm run start
-```
-
-## Separacion de repos (obligatoria)
-
-- `voltaje-dev` y `sole-manuales` son repos distintos.
-- Un commit en `voltaje-dev` no publica ni modifica `manual.solecolombia.org`.
-- Un commit en `sole-manuales` no modifica `voltaje-dev`.
-- El contenido oficial de manuales se edita y publica solo desde `SOLE-Colombia/sole-manuales`.
-
-## Aprobacion obligatoria
-
-- `CODEOWNERS` en `.github/CODEOWNERS`
-- Workflow de validacion en `.github/workflows/ci-docs.yml`
-- Branch protection recomendado en `main`:
-  - Require PR
-  - Require approvals
-  - Dismiss stale approvals
-  - Require status checks
+| Endpoint | Función |
+|----------|---------|
+| `/healthz` | Health check |
+| `/token-status` | Ver estado del token GitHub |
+| `/users` | Listar usuarios (sin claves) |
+| `/auth/v2` | Login |
 
 ## Deploy
 
 - Workflow: `.github/workflows/deploy-pages.yml`
-- Dominio: `manual.solecolombia.org`
-- CNAME esperado: `manual -> SOLE-Colombia.github.io`
-- Servicio de autenticacion CMS: `auth.manual.solecolombia.org` (Worker).
-
-## Publicar como repo independiente
-
-Ver `TRANSFER_TO_NEW_REPO.md`.
-
-Tambien puedes automatizar el bootstrap local con:
-
-```bash
-./scripts/bootstrap-new-repo.sh /ruta/sole-manuales git@github.com:SOLE-Colombia/sole-manuales.git
-```
+- Dominio: `intranet.solecolombia.org`
+- CNAME: `intranet → SOLE-Colombia.github.io`
+- Auth Worker: `auth.intranet.solecolombia.org`

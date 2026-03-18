@@ -3,13 +3,13 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'Manuales SOLE',
-  tagline: 'Manual de cacharrero y ruta para subir informacion a Voltaje',
+  title: 'Intranet SOLE',
+  tagline: 'Fuente de la verdad del equipo SOLE Colombia',
   favicon: 'img/favicon.ico',
   future: {
     v4: true,
   },
-  url: 'https://manual.solecolombia.org',
+  url: 'https://intranet.solecolombia.org',
   baseUrl: '/',
   organizationName: 'SOLE-Colombia',
   projectName: 'sole-manuales',
@@ -47,20 +47,18 @@ const config: Config = {
       respectPrefersColorScheme: false,
     },
     navbar: {
-      title: 'Manuales SOLE',
+      title: 'Intranet SOLE',
       logo: {
-        alt: 'Manuales SOLE',
+        alt: 'Intranet SOLE',
         src: 'img/logo.svg',
       },
       items: [
         {
-          to: '/docs/subir-informacion/overview',
+          to: '/docs/cacharrero/overview',
           position: 'left',
-          label: 'Subir información',
+          label: 'Cacharrero',
         },
-        {to: '/docs/cacharrero/overview', label: 'Cacharrero', position: 'left'},
-        {to: '/docs/legacy', label: 'Legacy', position: 'left'},
-        {href: 'https://manual.solecolombia.org/admin/', label: 'Editor', position: 'right'},
+        {href: 'https://intranet.solecolombia.org/admin/', label: 'Editor', position: 'right'},
         {
           href: 'https://github.com/SOLE-Colombia/sole-manuales',
           label: 'GitHub',
@@ -72,30 +70,31 @@ const config: Config = {
       style: 'light',
       links: [
         {
-          title: 'Manuales',
+          title: 'Equipo',
           items: [
-            {
-              label: 'Subir información',
-              to: '/docs/subir-informacion/overview',
-            },
-            {label: 'Cacharrero', to: '/docs/cacharrero/overview'},
-            {label: 'Legacy', to: '/docs/legacy'},
+            {label: 'Cuentera / Storyteller', to: '/docs/cuentera-storyteller/overview'},
+            {label: 'Maestre de la construcción', to: '/docs/maestre-construccion/overview'},
+            {label: 'Jardinera de proyectos', to: '/docs/jardinera-proyectos/overview'},
+            {label: 'Arquitecta de futuros', to: '/docs/arquitecta-futuros/overview'},
+            {label: 'Investigador', to: '/docs/investigador/overview'},
+          ],
+        },
+        {
+          title: 'Equipo (cont.)',
+          items: [
+            {label: 'Artista de datos', to: '/docs/artista-datos/overview'},
+            {label: 'Fundador Tenaz', to: '/docs/fundador-tenaz/overview'},
+            {label: 'Polo a Tierra', to: '/docs/polo-a-tierra/overview'},
+            {label: 'Estratega sole voltaje', to: '/docs/estratega-sole-voltaje/overview'},
+            {label: 'Anarqueologo de los medios', to: '/docs/anarqueologo-medios/overview'},
           ],
         },
         {
           title: 'Accesos',
           items: [
-            {label: 'Editor online', href: 'https://manual.solecolombia.org/admin/'},
-            {label: 'Implementación online', to: '/docs/cacharrero/implementacion-online'},
-          ],
-        },
-        {
-          title: 'Organización',
-          items: [
-            {
-              label: 'SOLE Colombia',
-              href: 'https://solecolombia.org',
-            },
+            {label: 'Editor online', href: 'https://intranet.solecolombia.org/admin/'},
+            {label: 'SOLE Colombia', href: 'https://solecolombia.org'},
+            {label: 'Voltaje', href: 'https://voltaje.solecolombia.org'},
             {label: 'Repositorio', href: 'https://github.com/SOLE-Colombia/sole-manuales'},
           ],
         },

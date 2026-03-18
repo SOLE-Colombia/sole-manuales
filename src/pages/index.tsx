@@ -16,6 +16,7 @@ type QuickLink = {
 type RoleCard = {
   role_id: string;
   label: string;
+  person?: string;
   description: string;
   start_path: string;
   quick_links: QuickLink[];
@@ -44,19 +45,19 @@ type HomeConfig = {
 
 const DEFAULT_HOME_CONFIG: HomeConfig = {
   hero: {
-    eyebrow: 'Fundacion SOLE Colombia',
-    title: 'Manuales para operar, publicar y sostener el conocimiento',
+    eyebrow: 'Fundación SOLE Colombia',
+    title: 'Intranet — Fuente de la verdad del equipo',
     subtitle:
-      'Ruta clara para equipos tecnicos y no tecnicos. Empieza por tu rol, sigue el flujo y publica con revision editorial.',
+      'Cada rol tiene su espacio para documentar, publicar y consultar. Encuentra tu sección y empieza a construir conocimiento.',
     background_image:
       'https://cdn.prod.website-files.com/63be04f0fe7d2f045f57f2d2/67619dc00a48333410dd56e0_IMG_7056-p-500.jpg',
     primary_cta: {
-      label: 'Empezar a subir informacion',
-      href: '/docs/subir-informacion/overview',
-      external: false,
+      label: 'Ir al Editor',
+      href: 'https://intranet.solecolombia.org/admin/',
+      external: true,
     },
     secondary_cta: {
-      label: 'Ir a Cacharrero',
+      label: 'Guía técnica',
       href: '/docs/cacharrero/overview',
       external: false,
     },
@@ -66,120 +67,12 @@ const DEFAULT_HOME_CONFIG: HomeConfig = {
       'https://cdn.prod.website-files.com/63be04f0fe7d2f045f57f2d2/66a14fd7f98e3740f1a43ab3_Recurso%20220.svg',
     logo_alt: 'SOLE Colombia',
   },
-  roles: [
-    {
-      role_id: 'editor',
-      label: 'Editor',
-      description: 'Crea y actualiza contenido en Markdown con flujo guiado de publicacion.',
-      start_path: '/docs/subir-informacion/overview',
-      quick_links: [
-        {label: 'Markdown basico', href: '/docs/subir-informacion/markdown-basico', external: false},
-        {
-          label: 'Checklist de publicacion',
-          href: '/docs/subir-informacion/checklist-publicacion',
-          external: false,
-        },
-        {label: 'Voltaje', href: 'https://voltaje.solecolombia.org', external: true},
-      ],
-    },
-    {
-      role_id: 'cacharrero',
-      label: 'Cacharrero',
-      description: 'Mantiene arquitectura, despliegue y operacion tecnica del portal de manuales.',
-      start_path: '/docs/cacharrero/overview',
-      quick_links: [
-        {label: 'Operacion local', href: '/docs/cacharrero/operacion-local', external: false},
-        {label: 'Deploy y entornos', href: '/docs/cacharrero/deploy-y-entornos', external: false},
-        {
-          label: 'CMS usuario y clave',
-          href: '/docs/cacharrero/cms-usuario-clave',
-          external: false,
-        },
-        {label: 'Repositorio', href: 'https://github.com/SOLE-Colombia/sole-manuales', external: true},
-      ],
-    },
-    {
-      role_id: 'direccion-voltaje',
-      label: 'Direccion de Voltaje',
-      description: 'Aprueba cambios estrategicos y valida lineamientos de publicacion.',
-      start_path: '/docs/cacharrero/auditoria-y-vigencia',
-      quick_links: [
-        {
-          label: 'Auditoria y vigencia',
-          href: '/docs/cacharrero/auditoria-y-vigencia',
-          external: false,
-        },
-        {
-          label: 'Implementacion online',
-          href: '/docs/cacharrero/implementacion-online',
-          external: false,
-        },
-        {label: 'Sitio SOLE', href: 'https://solecolombia.org', external: true},
-      ],
-    },
-    {
-      role_id: 'administrativo',
-      label: 'Administrativo',
-      description: 'Consulta rutas operativas, publicaciones vigentes y accesos institucionales.',
-      start_path: '/docs/subir-informacion/checklist-publicacion',
-      quick_links: [
-        {label: 'Flujo editorial', href: '/docs/subir-informacion/flujo-editorial', external: false},
-        {
-          label: 'Politica de colaboracion',
-          href: '/docs/subir-informacion/politica-colaboracion',
-          external: false,
-        },
-        {label: 'Fundacion SOLE', href: 'https://solecolombia.org', external: true},
-      ],
-    },
-    {
-      role_id: 'gestion-conocimiento',
-      label: 'Gestion del conocimiento',
-      description: 'Define vigencia documental y coordina calidad editorial en cada ciclo.',
-      start_path: '/docs/subir-informacion/politica-colaboracion',
-      quick_links: [
-        {
-          label: 'Politica de colaboracion',
-          href: '/docs/subir-informacion/politica-colaboracion',
-          external: false,
-        },
-        {
-          label: 'Laboratorio Markdown',
-          href: '/docs/subir-informacion/laboratorio-markdown',
-          external: false,
-        },
-        {label: 'Editor online', href: 'https://manual.solecolombia.org/admin/', external: true},
-      ],
-    },
-    {
-      role_id: 'jardinera-conexiones',
-      label: 'Jardinera de conexiones',
-      description: 'Conecta contenidos, rutas y equipos para facilitar publicacion sin friccion.',
-      start_path: '/docs/subir-informacion/flujo-editorial',
-      quick_links: [
-        {
-          label: 'Subir con GitHub Desktop',
-          href: '/docs/subir-informacion/subir-con-github-desktop',
-          external: false,
-        },
-        {
-          label: 'Subir con GitKraken',
-          href: '/docs/subir-informacion/subir-con-gitkraken',
-          external: false,
-        },
-        {label: 'Comunidad SOLE', href: 'https://www.solecolombia.org', external: true},
-      ],
-    },
-  ],
+  roles: [],
   quick_access: [
     {label: 'SOLE Colombia', href: 'https://solecolombia.org', external: true},
     {label: 'Voltaje', href: 'https://voltaje.solecolombia.org', external: true},
-    {
-      label: 'Repositorio de manuales',
-      href: 'https://github.com/SOLE-Colombia/sole-manuales',
-      external: true,
-    },
-    {label: 'Editor online', href: 'https://manual.solecolombia.org/admin/', external: true},
+    {label: 'Repositorio', href: 'https://github.com/SOLE-Colombia/sole-manuales', external: true},
+    {label: 'Editor online', href: 'https://intranet.solecolombia.org/admin/', external: true},
   ],
 };
 
@@ -304,7 +197,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={siteConfig.title}
-      description="Portal de manuales por rol para equipos de SOLE Colombia">
+      description="Intranet y fuente de la verdad del equipo SOLE Colombia">
       <main className={styles.pageRoot}>
         <section className={clsx('container', styles.heroBanner)} style={heroStyle}>
           <div className={styles.heroContent}>
@@ -333,37 +226,41 @@ export default function Home(): ReactNode {
           </div>
         </section>
 
-        <section className={clsx('container', styles.rolesSection)}>
-          <div className={styles.sectionHeader}>
-            <Heading as="h2">Elige tu ruta por rol</Heading>
-            <p>
-              Cada rol tiene una ruta recomendada y accesos directos para ejecutar tareas sin
-              friccion.
-            </p>
-          </div>
-          <div className={styles.sectionGrid}>
-            {homeConfig.roles.map((role) => (
-              <article key={role.role_id} className={styles.roleCard}>
-                <Heading as="h3">{role.label}</Heading>
-                <p>{role.description}</p>
-                <Link className={clsx('button button--primary button--sm', styles.openRoute)} to={role.start_path}>
-                  Abrir ruta
-                </Link>
-                <ul className={styles.quickLinks}>
-                  {role.quick_links.map((quickLink) => (
-                    <li key={`${role.role_id}-${quickLink.label}`}>
-                      <SmartLink link={quickLink} />
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </section>
+        {homeConfig.roles.length > 0 ? (
+          <section className={clsx('container', styles.rolesSection)}>
+            <div className={styles.sectionHeader}>
+              <Heading as="h2">Equipo SOLE</Heading>
+              <p>
+                Cada rol tiene su sección de documentación y acceso directo al editor.
+              </p>
+            </div>
+            <div className={styles.sectionGrid}>
+              {homeConfig.roles.map((role) => (
+                <article key={role.role_id} className={styles.roleCard}>
+                  <Heading as="h3">{role.label}</Heading>
+                  {role.person ? (
+                    <span className={styles.personBadge}>{role.person}</span>
+                  ) : null}
+                  <p>{role.description}</p>
+                  <Link className={clsx('button button--primary button--sm', styles.openRoute)} to={role.start_path}>
+                    Abrir sección
+                  </Link>
+                  <ul className={styles.quickLinks}>
+                    {role.quick_links.map((quickLink) => (
+                      <li key={`${role.role_id}-${quickLink.label}`}>
+                        <SmartLink link={quickLink} />
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <section className={clsx('container', styles.foundationLinks)}>
           <div className={styles.sectionHeader}>
-            <Heading as="h2">Accesos rapidos de fundacion</Heading>
+            <Heading as="h2">Accesos rápidos de fundación</Heading>
           </div>
           <div className={styles.linkRow}>
             {homeConfig.quick_access.map((item) => (

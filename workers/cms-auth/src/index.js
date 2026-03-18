@@ -1,8 +1,8 @@
-const DEFAULT_ALLOWED_ORIGINS = ['https://manual.solecolombia.org', 'http://localhost:3000'];
+const DEFAULT_ALLOWED_ORIGINS = ['https://intranet.solecolombia.org', 'http://localhost:3000'];
 const AUTH_PATHS = new Set(['/auth', '/auth/v2']);
 const CALLBACK_PATHS = new Set(['/callback', '/callback/v2']);
 
-/** @typedef {{ CMS_LOGIN_USER?: string, CMS_LOGIN_PASSWORD?: string, CMS_GITHUB_TOKEN?: string, ALLOWED_ORIGINS?: string }} Env */
+/** @typedef {{ CMS_LOGIN_USER?: string, CMS_LOGIN_PASSWORD?: string, CMS_GITHUB_TOKEN?: string, ALLOWED_ORIGINS?: string, CMS_USERS?: string }} Env */
 
 /** @param {string} value */
 function normalizeOrigin(value) {
@@ -24,6 +24,37 @@ function parseAllowedOrigins(env) {
     .map((item) => normalizeOrigin(item.trim()))
     .filter(Boolean);
   return parsed.length > 0 ? parsed : DEFAULT_ALLOWED_ORIGINS;
+}
+
+/**
+ * Parse multi-user list from CMS_USERS secret (JSON array).
+ * Falls back to single-user CMS_LOGIN_USER + CMS_LOGIN_PASSWORD.
+ * @param {Env} env
+ * @returns {{ user: string, password: string, name?: string, role?: string }[]}
+ */
+function parseUsers(env) {
+  // Try multi-user JSON first
+  if (env.CMS_USERS) {
+    try {
+      const parsed = JSON.parse(env.CMS_USERS);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed.filter(
+          (entry) => typeof entry.user === 'string' && typeof entry.password === 'string',
+        );
+      }
+    } catch {
+      // Invalid JSON, fall through to single-user
+    }
+  }
+
+  // Fallback: single-user (backward compatible)
+  const user = (env.CMS_LOGIN_USER || '').trim();
+  const password = (env.CMS_LOGIN_PASSWORD || '').trim();
+  if (user && password) {
+    return [{user, password, name: user, role: 'editor'}];
+  }
+
+  return [];
 }
 
 /**
@@ -79,7 +110,7 @@ function renderLoginPage({errorText, origin, provider, authPath}) {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ingreso CMS SOLE</title>
+    <title>Ingreso Intranet SOLE</title>
     <style>
       :root { color-scheme: light; }
       body {
@@ -98,6 +129,7 @@ function renderLoginPage({errorText, origin, provider, authPath}) {
         box-shadow: 8px 8px 0 #0f172a;
         padding: 22px;
       }
+      .logo { height: 32px; margin-bottom: 10px; }
       h1 { margin: 0 0 6px; font-size: 1.45rem; color: #0f172a; }
       p { color: #334155; margin: 0 0 16px; }
       label { display: block; margin: 12px 0 6px; font-weight: 600; color: #0f172a; }
@@ -119,6 +151,7 @@ function renderLoginPage({errorText, origin, provider, authPath}) {
         font-weight: 700;
         cursor: pointer;
       }
+      button:hover { background: #1e293b; }
       .note {
         margin-top: 12px;
         font-size: 0.83rem;
@@ -128,22 +161,23 @@ function renderLoginPage({errorText, origin, provider, authPath}) {
   </head>
   <body>
     <main class="card">
-      <h1>Ingreso al CMS</h1>
-      <p>Usa tu usuario y clave editorial para continuar.</p>
+      <img class="logo" src="https://cdn.prod.website-files.com/6050c5e23e5cf1cbe505d4b5/655e8776ea625d500a2e14d7_Recurso%20220.svg" alt="SOLE Colombia" />
+      <h1>Ingreso a la Intranet</h1>
+      <p>Usa tu correo y clave editorial para continuar.</p>
       ${errorBanner}
       <form method="post" action="${escapeHtml(authPath)}">
         <input type="hidden" name="origin" value="${escapeHtml(origin)}" />
         <input type="hidden" name="provider" value="${escapeHtml(provider)}" />
 
-        <label for="username">Usuario</label>
-        <input id="username" name="username" autocomplete="username" required />
+        <label for="username">Correo</label>
+        <input id="username" name="username" type="email" autocomplete="username" placeholder="tu@solecolombia.org" required />
 
         <label for="password">Clave</label>
         <input id="password" name="password" type="password" autocomplete="current-password" required />
 
         <button type="submit">Ingresar</button>
       </form>
-      <p class="note">Acceso restringido a equipo editorial autorizado.</p>
+      <p class="note">Acceso restringido a equipo SOLE Colombia autorizado.</p>
     </main>
   </body>
 </html>`;
@@ -200,7 +234,7 @@ async function handleGetAuth(request, env) {
 async function handlePostAuth(request, env) {
   const url = new URL(request.url);
   const form = await request.formData();
-  const username = String(form.get('username') || '');
+  const username = String(form.get('username') || '').trim().toLowerCase();
   const password = String(form.get('password') || '');
   const provider = String(form.get('provider') || 'github').toLowerCase();
 
@@ -210,28 +244,36 @@ async function handlePostAuth(request, env) {
     ? requestedOrigin
     : allowedOrigins[0];
 
-  const expectedUser = env.CMS_LOGIN_USER || '';
-  const expectedPassword = env.CMS_LOGIN_PASSWORD || '';
-  const githubToken = env.CMS_GITHUB_TOKEN || '';
+  const users = parseUsers(env);
+  const githubToken = (env.CMS_GITHUB_TOKEN || '').trim();
 
-  if (!expectedUser || !expectedPassword || !githubToken) {
+  if (users.length === 0 || !githubToken) {
     return new Response(
-      'Missing worker secrets. Set CMS_LOGIN_USER, CMS_LOGIN_PASSWORD and CMS_GITHUB_TOKEN.',
+      'Configuracion incompleta. El administrador debe configurar CMS_USERS (o CMS_LOGIN_USER + CMS_LOGIN_PASSWORD) y CMS_GITHUB_TOKEN.',
       {status: 500, headers: noStoreHeaders('text/plain; charset=utf-8')},
     );
   }
 
-  const isValidUser = constantTimeEqual(username, expectedUser);
-  const isValidPassword = constantTimeEqual(password, expectedPassword);
+  // Find matching user (constant-time compare for security)
+  let matched = false;
+  for (const entry of users) {
+    const userMatch = constantTimeEqual(username, entry.user.toLowerCase());
+    const passMatch = constantTimeEqual(password, entry.password);
+    if (userMatch && passMatch) {
+      matched = true;
+      break;
+    }
+  }
 
-  if (!isValidUser || !isValidPassword) {
+  if (!matched) {
+    // Delay to slow brute-force
     await new Promise((resolve) => setTimeout(resolve, 750));
 
     return new Response(renderLoginPage({
       origin,
       provider,
       authPath: url.pathname,
-      errorText: 'Usuario o clave inválidos.',
+      errorText: 'Correo o clave inválidos.',
     }), {
       status: 401,
       headers: noStoreHeaders(),
@@ -247,11 +289,112 @@ async function handlePostAuth(request, env) {
 /** @param {Request} request */
 function handleHealth(request) {
   const url = new URL(request.url);
-  const body = JSON.stringify({ok: true, service: 'cms-auth-worker', path: url.pathname});
+  const body = JSON.stringify({ok: true, service: 'intranet-auth-worker', path: url.pathname});
   return new Response(body, {
     status: 200,
     headers: noStoreHeaders('application/json; charset=utf-8'),
   });
+}
+
+/**
+ * GET /token-status
+ * Checks the configured CMS_GITHUB_TOKEN against GitHub API and returns
+ * validity, scopes, rate limits, and associated user info.
+ * @param {Request} request
+ * @param {Env} env
+ */
+async function handleTokenStatus(request, env) {
+  const githubToken = (env.CMS_GITHUB_TOKEN || '').trim();
+
+  if (!githubToken) {
+    return new Response(
+      JSON.stringify({ok: false, error: 'CMS_GITHUB_TOKEN no esta configurado.'}),
+      {status: 500, headers: noStoreHeaders('application/json; charset=utf-8')},
+    );
+  }
+
+  try {
+    const ghResponse = await fetch('https://api.github.com/user', {
+      headers: {
+        Authorization: `token ${githubToken}`,
+        Accept: 'application/vnd.github+json',
+        'User-Agent': 'sole-intranet-auth-worker',
+      },
+    });
+
+    const rateLimit = {
+      limit: ghResponse.headers.get('x-ratelimit-limit'),
+      remaining: ghResponse.headers.get('x-ratelimit-remaining'),
+      reset: ghResponse.headers.get('x-ratelimit-reset'),
+      reset_date: ghResponse.headers.get('x-ratelimit-reset')
+        ? new Date(Number(ghResponse.headers.get('x-ratelimit-reset')) * 1000).toISOString()
+        : null,
+    };
+
+    const scopes = ghResponse.headers.get('x-oauth-scopes') || '(none)';
+
+    if (!ghResponse.ok) {
+      return new Response(
+        JSON.stringify({
+          ok: false,
+          error: `Token invalido o expirado. GitHub devolvio HTTP ${ghResponse.status}.`,
+          token_valid: false,
+          scopes,
+          rate_limit: rateLimit,
+        }),
+        {status: 200, headers: noStoreHeaders('application/json; charset=utf-8')},
+      );
+    }
+
+    const ghUser = await ghResponse.json();
+
+    // Check repo access
+    let repoAccess = 'desconocido';
+    try {
+      const repoResponse = await fetch('https://api.github.com/repos/SOLE-Colombia/sole-manuales', {
+        headers: {
+          Authorization: `token ${githubToken}`,
+          Accept: 'application/vnd.github+json',
+          'User-Agent': 'sole-intranet-auth-worker',
+        },
+      });
+      repoAccess = repoResponse.ok ? 'si' : 'no';
+    } catch {
+      repoAccess = 'error verificando';
+    }
+
+    return new Response(
+      JSON.stringify({
+        ok: true,
+        token_valid: true,
+        github_user: ghUser.login,
+        github_name: ghUser.name || '(sin nombre)',
+        scopes,
+        repo_access: repoAccess,
+        rate_limit: rateLimit,
+        note: 'Si el token es un Fine-grained Personal Access Token, los scopes pueden aparecer vacios. Revisa los permisos en github.com/settings/tokens.',
+      }),
+      {status: 200, headers: noStoreHeaders('application/json; charset=utf-8')},
+    );
+  } catch (err) {
+    return new Response(
+      JSON.stringify({ok: false, error: `Error al consultar GitHub: ${err.message}`}),
+      {status: 500, headers: noStoreHeaders('application/json; charset=utf-8')},
+    );
+  }
+}
+
+/**
+ * GET /users — List configured users (names and roles only, no passwords).
+ * @param {Env} env
+ */
+function handleListUsers(env) {
+  const users = parseUsers(env);
+  const safeList = users.map(({user, name, role}) => ({user, name: name || user, role: role || 'editor'}));
+  return new Response(
+    JSON.stringify({ok: true, count: safeList.length, users: safeList}),
+    {status: 200, headers: noStoreHeaders('application/json; charset=utf-8')},
+  );
 }
 
 /** @type {ExportedHandler<Env>} */
@@ -267,6 +410,14 @@ export default {
       return handleHealth(request);
     }
 
+    if (url.pathname === '/token-status' && request.method === 'GET') {
+      return handleTokenStatus(request, env);
+    }
+
+    if (url.pathname === '/users' && request.method === 'GET') {
+      return handleListUsers(env);
+    }
+
     if (AUTH_PATHS.has(url.pathname) && request.method === 'GET') {
       return handleGetAuth(request, env);
     }
@@ -277,7 +428,7 @@ export default {
 
     if (CALLBACK_PATHS.has(url.pathname)) {
       return new Response(
-        'This worker uses /auth directly (no OAuth callback needed).',
+        'Este Worker usa /auth directamente (no necesita callback OAuth).',
         {status: 200, headers: noStoreHeaders('text/plain; charset=utf-8')},
       );
     }

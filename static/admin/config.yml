@@ -2,15 +2,14 @@ backend:
   name: github
   repo: SOLE-Colombia/sole-manuales
   branch: main
-  # Login CMS por usuario/clave via Cloudflare Worker:
-  # workers/cms-auth/
+  # Auth via Cloudflare Worker (multi-usuario):
   base_url: https://auth.manual.solecolombia.org
   auth_endpoint: /auth/v2
 
 publish_mode: editorial_workflow
 
-site_url: https://manual.solecolombia.org
-display_url: https://manual.solecolombia.org
+site_url: https://intranet.solecolombia.org
+display_url: https://intranet.solecolombia.org
 logo_url: https://cdn.prod.website-files.com/6050c5e23e5cf1cbe505d4b5/655e8776ea625d500a2e14d7_Recurso%20220.svg
 
 media_folder: static/uploads
@@ -22,9 +21,9 @@ slug:
   sanitize_replacement: '-'
 
 collections:
-  - name: cacharrero
-    label: Cacharrero
-    folder: docs/cacharrero
+  - name: cuentera-storyteller
+    label: "Cuentera / Storyteller"
+    folder: docs/cuentera-storyteller
     create: true
     extension: md
     format: frontmatter
@@ -39,16 +38,6 @@ collections:
         widget: number
         value_type: int
         min: 1
-      - label: Owner Role
-        name: owner_role
-        widget: select
-        options:
-          - Editor
-          - Cacharrero
-          - Dirección de Voltaje
-          - Administrativo
-          - Gestion del conocimiento
-          - Jardinera de conexiones
       - label: Last Reviewed
         name: last_reviewed
         widget: datetime
@@ -65,9 +54,9 @@ collections:
         name: body
         widget: markdown
 
-  - name: subir_informacion
-    label: Subir informacion
-    folder: docs/subir-informacion
+  - name: maestre-construccion
+    label: "Maestre de la construcción"
+    folder: docs/maestre-construccion
     create: true
     extension: md
     format: frontmatter
@@ -82,16 +71,303 @@ collections:
         widget: number
         value_type: int
         min: 1
-      - label: Owner Role
-        name: owner_role
+      - label: Last Reviewed
+        name: last_reviewed
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Status
+        name: status
         widget: select
         options:
-          - Editor
-          - Cacharrero
-          - Dirección de Voltaje
-          - Administrativo
-          - Gestion del conocimiento
-          - Jardinera de conexiones
+          - draft
+          - review
+          - published
+      - label: Contenido
+        name: body
+        widget: markdown
+
+  - name: jardinera-proyectos
+    label: "Jardinera de proyectos"
+    folder: docs/jardinera-proyectos
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    summary: '{{title}} · {{status}}'
+    fields:
+      - label: Titulo
+        name: title
+        widget: string
+      - label: Sidebar Position
+        name: sidebar_position
+        widget: number
+        value_type: int
+        min: 1
+      - label: Last Reviewed
+        name: last_reviewed
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - draft
+          - review
+          - published
+      - label: Contenido
+        name: body
+        widget: markdown
+
+  - name: arquitecta-futuros
+    label: "Arquitecta de futuros"
+    folder: docs/arquitecta-futuros
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    summary: '{{title}} · {{status}}'
+    fields:
+      - label: Titulo
+        name: title
+        widget: string
+      - label: Sidebar Position
+        name: sidebar_position
+        widget: number
+        value_type: int
+        min: 1
+      - label: Last Reviewed
+        name: last_reviewed
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - draft
+          - review
+          - published
+      - label: Contenido
+        name: body
+        widget: markdown
+
+  - name: investigador
+    label: "Investigador"
+    folder: docs/investigador
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    summary: '{{title}} · {{status}}'
+    fields:
+      - label: Titulo
+        name: title
+        widget: string
+      - label: Sidebar Position
+        name: sidebar_position
+        widget: number
+        value_type: int
+        min: 1
+      - label: Last Reviewed
+        name: last_reviewed
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - draft
+          - review
+          - published
+      - label: Contenido
+        name: body
+        widget: markdown
+
+  - name: artista-datos
+    label: "Artista de datos"
+    folder: docs/artista-datos
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    summary: '{{title}} · {{status}}'
+    fields:
+      - label: Titulo
+        name: title
+        widget: string
+      - label: Sidebar Position
+        name: sidebar_position
+        widget: number
+        value_type: int
+        min: 1
+      - label: Last Reviewed
+        name: last_reviewed
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - draft
+          - review
+          - published
+      - label: Contenido
+        name: body
+        widget: markdown
+
+  - name: fundador-tenaz
+    label: "Fundador Tenaz"
+    folder: docs/fundador-tenaz
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    summary: '{{title}} · {{status}}'
+    fields:
+      - label: Titulo
+        name: title
+        widget: string
+      - label: Sidebar Position
+        name: sidebar_position
+        widget: number
+        value_type: int
+        min: 1
+      - label: Last Reviewed
+        name: last_reviewed
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - draft
+          - review
+          - published
+      - label: Contenido
+        name: body
+        widget: markdown
+
+  - name: polo-a-tierra
+    label: "Polo a Tierra"
+    folder: docs/polo-a-tierra
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    summary: '{{title}} · {{status}}'
+    fields:
+      - label: Titulo
+        name: title
+        widget: string
+      - label: Sidebar Position
+        name: sidebar_position
+        widget: number
+        value_type: int
+        min: 1
+      - label: Last Reviewed
+        name: last_reviewed
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - draft
+          - review
+          - published
+      - label: Contenido
+        name: body
+        widget: markdown
+
+  - name: estratega-sole-voltaje
+    label: "Estratega sole voltaje"
+    folder: docs/estratega-sole-voltaje
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    summary: '{{title}} · {{status}}'
+    fields:
+      - label: Titulo
+        name: title
+        widget: string
+      - label: Sidebar Position
+        name: sidebar_position
+        widget: number
+        value_type: int
+        min: 1
+      - label: Last Reviewed
+        name: last_reviewed
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - draft
+          - review
+          - published
+      - label: Contenido
+        name: body
+        widget: markdown
+
+  - name: anarqueologo-medios
+    label: "Anarqueologo de los medios"
+    folder: docs/anarqueologo-medios
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    summary: '{{title}} · {{status}}'
+    fields:
+      - label: Titulo
+        name: title
+        widget: string
+      - label: Sidebar Position
+        name: sidebar_position
+        widget: number
+        value_type: int
+        min: 1
+      - label: Last Reviewed
+        name: last_reviewed
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - draft
+          - review
+          - published
+      - label: Contenido
+        name: body
+        widget: markdown
+
+  - name: cacharrero
+    label: "Cacharrero (técnico)"
+    folder: docs/cacharrero
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    summary: '{{title}} · {{status}}'
+    fields:
+      - label: Titulo
+        name: title
+        widget: string
+      - label: Sidebar Position
+        name: sidebar_position
+        widget: number
+        value_type: int
+        min: 1
       - label: Last Reviewed
         name: last_reviewed
         widget: datetime
@@ -119,10 +395,6 @@ collections:
       - label: Titulo
         name: title
         widget: string
-      - label: Owner Role
-        name: owner_role
-        widget: hidden
-        default: Editor
       - label: Last Reviewed
         name: last_reviewed
         widget: datetime
@@ -212,6 +484,9 @@ collections:
                 widget: string
               - label: Etiqueta
                 name: label
+                widget: string
+              - label: Persona responsable
+                name: person
                 widget: string
               - label: Descripcion
                 name: description

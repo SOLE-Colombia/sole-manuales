@@ -3,9 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SOLE Manuales CMS</title>
+    <title>Intranet SOLE — Editor</title>
   </head>
   <body>
     <script src="https://unpkg.com/decap-cms@3.8.3/dist/decap-cms.js"></script>
+    <script>
+      // Evitar que Decap muestre la pantalla de login de GitHub.
+      // El Worker maneja toda la autenticación via popup.
+      if (window.location.hash === '#/' || window.location.hash === '') {
+        // Forzar que el CMS use el auth_endpoint definido en config.yml
+        // en lugar de intentar OAuth directo con GitHub.
+        console.log('[SOLE] Auth delegado al Worker de autenticación.');
+      }
+    </script>
   </body>
 </html>

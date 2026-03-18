@@ -1,75 +1,123 @@
 ---
-title: CMS con usuario y clave
+title: CMS con multi-usuario
 sidebar_position: 7
-owner_role: Cacharrero
-last_reviewed: 2026-02-25
+last_reviewed: 2026-03-17
 status: published
 ---
 
-# CMS con usuario y clave
+# CMS con multi-usuario
 
-Esta guia activa el ingreso simple por `usuario + clave` para el CMS sin depender del OAuth de GitHub.
+El CMS usa un Cloudflare Worker para autenticación con **correo + clave**. No depende de GitHub OAuth.
 
-## Estado implementado
+## Cómo funciona
 
-- Worker de auth en `workers/cms-auth/`.
-- Dominio de auth: `https://auth.manual.solecolombia.org/auth/v2`.
-- Backend Decap en `static/admin/config.yml`:
+1. Abre `https://intranet.solecolombia.org/admin/`.
+2. Decap CMS abre popup al Worker de autenticación.
+3. Ingresa tu correo y clave editorial.
+4. El Worker valida las credenciales contra la lista de usuarios.
+5. Si son válidas, Decap recibe un token de servicio y puede editar contenido.
 
-```yml
-backend:
-  name: github
-  repo: SOLE-Colombia/sole-manuales
-  branch: main
-  base_url: https://auth.manual.solecolombia.org
-  auth_endpoint: /auth/v2
-publish_mode: editorial_workflow
+## Usuarios configurados
+
+Los usuarios se guardan como un **secreto cifrado** en Cloudflare llamado `CMS_USERS`. No están en el repositorio.
+
+Formato del secreto (JSON array):
+
+```json
+[
+  {"user": "natalia@solecolombia.org", "password": "...", "name": "Natalia Torres", "role": "Cuentera/Storyteller"},
+  {"user": "julian@solecolombia.org", "password": "...", "name": "Julian Ruíz", "role": "Maestre de la construcción"}
+]
 ```
 
-## Como funciona
+## Agregar un usuario
 
-1. Usuario abre `https://manual.solecolombia.org/admin/`.
-2. Decap abre popup a `/auth/v2`.
-3. Worker valida `usuario + clave`.
-4. Worker responde a Decap con token GitHub de servicio.
-5. Decap crea ramas, commits y PR en `SOLE-Colombia/sole-manuales`.
+1. Prepara el JSON completo con el nuevo usuario agregado.
+2. Ejecuta desde la carpeta `workers/cms-auth`:
 
-## Variables y secretos del Worker
+```bash
+npx wrangler secret put CMS_USERS
+```
 
-Archivo: `workers/cms-auth/wrangler.toml`
+3. Pega el JSON completo cuando lo solicite.
+4. Re-deploya el Worker: `npx wrangler deploy`.
 
-- `ALLOWED_ORIGINS`: orígenes permitidos (`manual.solecolombia.org`, `localhost`).
-- `CMS_LOGIN_USER`: usuario permitido.
+## Cambiar una clave
 
-Secretos obligatorios (no versionados):
+1. Modifica el campo `password` del usuario en el JSON.
+2. Ejecuta `npx wrangler secret put CMS_USERS` y pega el JSON actualizado.
+3. No necesitas re-deployar el Worker después de cambiar un secreto.
+
+## Eliminar un usuario
+
+1. Quita el objeto del usuario del array JSON.
+2. Ejecuta `npx wrangler secret put CMS_USERS` y pega el JSON actualizado.
+
+## Verificar estado del token GitHub
+
+Visita:
+
+```
+https://auth.intranet.solecolombia.org/token-status
+```
+
+Esto muestra:
+- Si el token es válido
+- Los permisos (scopes) del token
+- Cuántas solicitudes quedan (rate limit)
+- A qué cuenta de GitHub está asociado
+
+## Ver usuarios (sin claves)
+
+```
+https://auth.intranet.solecolombia.org/users
+```
+
+## Dónde están las claves
+
+Las claves **no están en el repositorio** ni en `wrangler.toml`. Están guardadas como **secretos cifrados** en el panel de Cloudflare Workers.
+
+Para configurarlos:
 
 ```bash
 cd workers/cms-auth
-npx wrangler secret put CMS_LOGIN_PASSWORD
+npx wrangler secret put CMS_USERS
 npx wrangler secret put CMS_GITHUB_TOKEN
 ```
 
-## Deploy del Worker
+> **Importante**: `wrangler secret put` te pedirá que pegues el valor. Estos valores nunca aparecen en archivos de texto ni en el historial de git.
 
-```bash
-cd workers/cms-auth
-npx wrangler deploy
-```
+## Sobre el token de GitHub
 
-Configurar custom domain del Worker en Cloudflare:
+El `CMS_GITHUB_TOKEN` es un **Personal Access Token** de GitHub que permite al CMS crear ramas, commits y Pull Requests en el repositorio.
 
-- `auth.manual.solecolombia.org`
+### Tipos de token
 
-## Checklist de validacion
+| Tipo | Duración | Recomendación |
+|------|----------|---------------|
+| Classic PAT | Sin expiración (o configurable) | Menos seguro, pero más simple |
+| Fine-grained PAT | Máximo 1 año | Más seguro, permisos específicos por repo |
 
-- [ ] `https://auth.manual.solecolombia.org/healthz` responde `{ \"ok\": true }`.
-- [ ] `/admin` muestra popup de usuario/clave.
-- [ ] Login correcto abre CMS sin redirigir a GitHub.
-- [ ] Crear draft abre PR en GitHub.
-- [ ] PR requiere aprobacion antes de merge.
+### Permisos mínimos recomendados
 
-## Seguridad minima recomendada
+Para un Fine-grained PAT:
+- **Repository access**: Solo `SOLE-Colombia/sole-manuales`
+- **Permissions**: Contents (Read and write), Pull requests (Read and write)
 
-- Usar cuenta bot para `CMS_GITHUB_TOKEN` con permisos mínimos.
-- Rotar `CMS_LOGIN_PASSWORD` y `CMS_GITHUB_TOKEN` cada trimestre.
-- Restringir `ALLOWED_ORIGINS` a dominios oficiales.
+Para un Classic PAT:
+- **Scope**: `repo` (acceso completo a repositorios privados)
+
+### Verificar expiración
+
+1. Visita `https://auth.intranet.solecolombia.org/token-status`
+2. Si dice `token_valid: false`, el token expiró y necesitas crear uno nuevo
+3. Para crear uno nuevo:
+   - Ve a [github.com/settings/tokens](https://github.com/settings/tokens)
+   - Crea un nuevo token con los permisos mínimos
+   - Ejecuta `npx wrangler secret put CMS_GITHUB_TOKEN` y pega el nuevo token
+
+### Rotación recomendada
+
+- Rotar `CMS_GITHUB_TOKEN` cada **6 meses** como mínimo
+- Rotar `CMS_USERS` (cambiar claves) cada **trimestre**
+- Usar una **cuenta bot** de GitHub dedicada para el token (no tu cuenta personal)

@@ -3,16 +3,22 @@ main = "src/index.js"
 compatibility_date = "2026-02-25"
 workers_dev = false
 
-# Configura la ruta custom domain en Cloudflare Dashboard para:
-# auth.manual.solecolombia.org
+# Custom domain en Cloudflare Dashboard:
+# auth.intranet.solecolombia.org (o auth.manual.solecolombia.org si no has migrado)
 
 [vars]
-# Lista separada por comas.
-ALLOWED_ORIGINS = "https://manual.solecolombia.org,http://localhost:3000"
-
-# Usuario de acceso al CMS (secreto recomendado si prefieres no versionarlo).
-CMS_LOGIN_USER = "editor"
+# Origenes permitidos para el popup de autenticacion.
+ALLOWED_ORIGINS = "https://intranet.solecolombia.org,https://manual.solecolombia.org,http://localhost:3000"
 
 # Secretos requeridos (no se guardan en git):
-# wrangler secret put CMS_LOGIN_PASSWORD
-# wrangler secret put CMS_GITHUB_TOKEN
+#
+# CMS_USERS: JSON con lista de usuarios. Formato:
+#   [{"user":"natalia@solecolombia.org","password":"sole2026","name":"Natalia Torres","role":"Cuentera/Storyteller"}, ...]
+#
+# CMS_GITHUB_TOKEN: token de GitHub de servicio con permisos sobre el repo.
+#
+# Comandos para configurar:
+#   wrangler secret put CMS_USERS
+#   wrangler secret put CMS_GITHUB_TOKEN
+#
+# Compatibilidad: si CMS_USERS no existe, usa CMS_LOGIN_USER + CMS_LOGIN_PASSWORD (modo 1 usuario).
