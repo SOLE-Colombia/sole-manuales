@@ -18,21 +18,21 @@
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #f4f4f4;
-  --ifm-color-primary-dark: #e8e8e8;
-  --ifm-color-primary-darker: #d4d4d4;
-  --ifm-color-primary-darkest: #c0c0c0;
-  --ifm-color-primary-light: #ffffff;
-  --ifm-color-primary-lighter: #ffffff;
-  --ifm-color-primary-lightest: #ffffff;
-  --ifm-background-color: #111111;
+  --ifm-color-primary: #fbfc04;
+  --ifm-color-primary-dark: #e1e303;
+  --ifm-color-primary-darker: #c5c703;
+  --ifm-color-primary-darkest: #a1a302;
+  --ifm-color-primary-light: #fcfd36;
+  --ifm-color-primary-lighter: #fcfd4e;
+  --ifm-color-primary-lightest: #fefe98;
+  --ifm-background-color: #0a0a0a;
   --ifm-font-color-base: #f4f4f4;
-  --ifm-link-color: #f4f4f4;
-  --ifm-navbar-background-color: #111111;
-  --ifm-footer-background-color: #111111;
-  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
-  --manual-border: 3px solid #f4f4f4;
-  --manual-shadow: 6px 6px 0 #f4f4f4;
+  --ifm-link-color: #fbfc04;
+  --ifm-navbar-background-color: #000000;
+  --ifm-footer-background-color: #000000;
+  --docusaurus-highlighted-code-line-bg: rgba(251, 252, 4, 0.1);
+  --manual-border: 3px solid #333;
+  --manual-shadow: 6px 6px 0 #fbfc04;
 }
 
 .navbar,
@@ -91,4 +91,19 @@
 [data-theme='dark'] .manual-card,
 [data-theme='dark'] .manual-step {
   background: #111111;
+}
+
+/* Tweak buttons in dark mode to look Voltaje */
+[data-theme='dark'] .button.button--primary {
+  color: #000000;
+  font-weight: bold;
+}
+
+[data-theme='dark'] .navbar__logo {
+  filter: brightness(0) invert(1);
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.01em;
 }

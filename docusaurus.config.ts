@@ -42,15 +42,15 @@ const config: Config = {
   themeConfig: {
     image: 'img/docusaurus-social-card.jpg',
     colorMode: {
-      defaultMode: 'light',
+      defaultMode: 'dark',
       disableSwitch: false,
       respectPrefersColorScheme: false,
     },
     navbar: {
-      title: 'Intranet SOLE',
+      title: 'Intranet',
       logo: {
-        alt: 'Intranet SOLE',
-        src: 'img/logo.svg',
+        alt: 'SOLE Logo',
+        src: 'https://cdn.prod.website-files.com/6050c5e23e5cf1cbe505d4b5/60956ffd9887014318c00ca9_SOLE-Logo_Color-Blanco-Abr19.png',
       },
       items: [
         {
@@ -86,7 +86,7 @@ const config: Config = {
             {label: 'Fundador Tenaz', to: '/docs/fundador-tenaz/overview'},
             {label: 'Polo a Tierra', to: '/docs/polo-a-tierra/overview'},
             {label: 'Estratega sole voltaje', to: '/docs/estratega-sole-voltaje/overview'},
-            {label: 'Anarqueologo de los medios', to: '/docs/anarqueologo-medios/overview'},
+            {label: 'Cacharrero', to: '/docs/cacharrero/overview'},
           ],
         },
         {
