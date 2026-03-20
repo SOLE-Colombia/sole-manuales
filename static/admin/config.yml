@@ -318,39 +318,6 @@ collections:
         name: body
         widget: markdown
 
-  - name: anarqueologo-medios
-    label: "Anarqueologo de los medios"
-    folder: docs/anarqueologo-medios
-    create: true
-    extension: md
-    format: frontmatter
-    slug: '{{slug}}'
-    summary: '{{title}} · {{status}}'
-    fields:
-      - label: Titulo
-        name: title
-        widget: string
-      - label: Sidebar Position
-        name: sidebar_position
-        widget: number
-        value_type: int
-        min: 1
-      - label: Last Reviewed
-        name: last_reviewed
-        widget: datetime
-        date_format: YYYY-MM-DD
-        time_format: false
-      - label: Status
-        name: status
-        widget: select
-        options:
-          - draft
-          - review
-          - published
-      - label: Contenido
-        name: body
-        widget: markdown
-
   - name: cacharrero
     label: "Cacharrero (técnico)"
     folder: docs/cacharrero
