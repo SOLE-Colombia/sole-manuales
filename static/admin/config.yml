@@ -10,7 +10,7 @@ publish_mode: editorial_workflow
 
 site_url: https://intranet.solecolombia.org
 display_url: https://intranet.solecolombia.org
-logo_url: https://cdn.prod.website-files.com/6050c5e23e5cf1cbe505d4b5/655e8776ea625d500a2e14d7_Recurso%20220.svg
+logo_url: https://cdn.prod.website-files.com/6050c5e23e5cf1cbe505d4b5/60956ffd9887014318c00ca9_SOLE-Logo_Color-Blanco-Abr19.png
 
 media_folder: static/uploads
 public_folder: /uploads

@@ -112,58 +112,105 @@ function renderLoginPage({errorText, origin, provider, authPath}) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Ingreso Intranet SOLE</title>
     <style>
-      :root { color-scheme: light; }
+      :root {
+        --voltaje-accent: #fbfc04;
+        --voltaje-dark: #000000;
+        --voltaje-light: #ffffff;
+        --voltaje-text: #333333;
+        color-scheme: light;
+      }
       body {
         margin: 0;
         min-height: 100vh;
         display: grid;
         place-items: center;
-        background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-        font-family: 'Segoe UI', Tahoma, sans-serif;
+        background-color: var(--voltaje-dark);
+        background-image: radial-gradient(var(--voltaje-accent) 1px, transparent 1px);
+        background-size: 30px 30px;
+        font-family: system-ui, -apple-system, sans-serif;
       }
       .card {
         width: min(440px, calc(100vw - 40px));
-        background: #ffffff;
-        border: 2px solid #0f172a;
-        border-radius: 14px;
-        box-shadow: 8px 8px 0 #0f172a;
-        padding: 22px;
+        background: var(--voltaje-light);
+        border: 4px solid var(--voltaje-dark);
+        border-radius: 0px;
+        box-shadow: 12px 12px 0 var(--voltaje-accent);
+        padding: 40px 30px;
+        text-align: center;
       }
-      .logo { height: 32px; margin-bottom: 10px; }
-      h1 { margin: 0 0 6px; font-size: 1.45rem; color: #0f172a; }
-      p { color: #334155; margin: 0 0 16px; }
-      label { display: block; margin: 12px 0 6px; font-weight: 600; color: #0f172a; }
+      .logo { 
+        height: 60px; 
+        margin-bottom: 24px;
+        background: var(--voltaje-dark);
+        padding: 10px;
+        border-radius: 4px;
+      }
+      h1 { 
+        margin: 0 0 8px; 
+        font-size: 1.8rem; 
+        color: var(--voltaje-dark); 
+        text-transform: uppercase;
+        font-weight: 900;
+      }
+      p { 
+        color: var(--voltaje-text); 
+        margin: 0 0 24px; 
+        font-size: 1.1rem;
+      }
+      label { 
+        display: block; 
+        margin: 16px 0 8px; 
+        font-weight: 700; 
+        color: var(--voltaje-dark);
+        text-align: left;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+      }
       input {
         width: 100%;
-        padding: 10px 12px;
-        border-radius: 8px;
-        border: 1px solid #94a3b8;
+        padding: 14px 16px;
+        border: 2px solid var(--voltaje-dark);
+        border-radius: 0px;
         box-sizing: border-box;
+        font-size: 1rem;
+        background: #f8f8f8;
+      }
+      input:focus {
+        outline: none;
+        background: var(--voltaje-light);
+        border-color: var(--voltaje-accent);
       }
       button {
-        margin-top: 16px;
+        margin-top: 32px;
         width: 100%;
-        padding: 11px 14px;
-        border-radius: 8px;
-        border: 1px solid #0f172a;
-        background: #0f172a;
-        color: #ffffff;
-        font-weight: 700;
+        padding: 16px 20px;
+        border: 3px solid var(--voltaje-dark);
+        border-radius: 0px;
+        background: var(--voltaje-accent);
+        color: var(--voltaje-dark);
+        font-weight: 900;
+        font-size: 1.2rem;
+        text-transform: uppercase;
         cursor: pointer;
+        transition: all 0.2s ease;
       }
-      button:hover { background: #1e293b; }
+      button:hover { 
+        transform: translate(-4px, -4px);
+        box-shadow: 6px 6px 0 var(--voltaje-dark);
+      }
       .note {
-        margin-top: 12px;
-        font-size: 0.83rem;
-        color: #475569;
+        margin-top: 24px;
+        font-size: 0.85rem;
+        color: #666;
+        font-weight: 500;
       }
     </style>
   </head>
   <body>
     <main class="card">
-      <img class="logo" src="https://cdn.prod.website-files.com/6050c5e23e5cf1cbe505d4b5/655e8776ea625d500a2e14d7_Recurso%20220.svg" alt="SOLE Colombia" />
-      <h1>Ingreso a la Intranet</h1>
-      <p>Usa tu correo y clave editorial para continuar.</p>
+      <img class="logo" src="https://cdn.prod.website-files.com/6050c5e23e5cf1cbe505d4b5/60956ffd9887014318c00ca9_SOLE-Logo_Color-Blanco-Abr19.png" alt="SOLE Colombia" />
+      <h1>Manuales SOLE</h1>
+      <p>La fuente de la verdad para nuestro equipo.</p>
       ${errorBanner}
       <form method="post" action="${escapeHtml(authPath)}">
         <input type="hidden" name="origin" value="${escapeHtml(origin)}" />
