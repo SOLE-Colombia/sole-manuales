@@ -3,7 +3,7 @@ backend:
   repo: SOLE-Colombia/sole-manuales
   branch: main
   # Auth via Cloudflare Worker (multi-usuario):
-  base_url: https://auth.manual.solecolombia.org
+  base_url: https://auth.intranet.solecolombia.org
   auth_endpoint: /auth/v2
 
 publish_mode: editorial_workflow
