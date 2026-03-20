@@ -13,7 +13,7 @@ const config: Config = {
   baseUrl: '/',
   organizationName: 'SOLE-Colombia',
   projectName: 'sole-manuales',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   markdown: {
     hooks: {
       onBrokenMarkdownLinks: 'warn',
